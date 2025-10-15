@@ -30,7 +30,7 @@ class SettingInterface(ScrollArea):
         self.pivot = SettingPivot(self)
         self.stackedWidget = QStackedWidget(self)
 
-        self.settingLabel = QLabel(self.tr("설정"), self)
+        self.settingLabel = QLabel(self.tr("设置"), self)
 
         self.__initWidget()
         self.__initCard()
@@ -43,24 +43,56 @@ class SettingInterface(ScrollArea):
         self.setViewportMargins(0, 140, 0, 5)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
+        # self.title_area.setWidget(self.pivot)
+        # self.title_area.setWidgetResizable(True)
+        # self.title_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        # self.title_area.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.title_area.setMinimumSize(800, 50)
+        # self.title_area.setStyleSheet("""
+        #     QScrollBar:horizontal {
+        #         height: 4px;
+        #         background: #f0f0f0;
+        #         border-radius: 10px;
+        #     }
+
+        #     QScrollBar::handle:horizontal {
+        #         background: #888;
+        #         border-radius: 10px;
+        #     }
+
+        #     QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+        #         background: none;
+        #     }
+
+        #     QScrollBar::handle:horizontal:hover {
+        #         background: #555;
+        #     }
+        # """)
         self.setObjectName('settingInterface')
         self.scrollWidget.setObjectName('scrollWidget')
         self.settingLabel.setObjectName('settingLabel')
         StyleSheet.SETTING_INTERFACE.apply(self)
 
     def __initCard(self):
-        self.PowerGroup = SettingCardGroup(self.tr("개척력 설정"), self.scrollWidget)
+        self.PowerGroup = SettingCardGroup(self.tr("体力设置"), self.scrollWidget)
         self.instanceTypeCard = ComboBoxSettingCard1(
             "instance_type",
             FIF.ALIGNMENT,
-            self.tr('콘텐츠 유형'),
+            self.tr('副本类型'),
             None,
-            texts=['의식의 고치(금)', '의식의 고치(적)', '정체된 허영', '부식의 동굴', '시뮬레이션 우주']
+            texts=['拟造花萼（金）', '拟造花萼（赤）', '凝滞虚影', '侵蚀隧洞', '饰品提取']
         )
+        # self.calyxGoldenPreferenceCard = ComboBoxSettingCard2(
+        #     "calyx_golden_preference",
+        #     FIF.PIE_SINGLE,
+        #     self.tr('拟造花萼（金）偏好地区'),
+        #     '',
+        #     texts={'雅利洛-VI': 'Jarilo-VI', '仙舟「罗浮」': 'XianzhouLuofu', '匹诺康尼': 'Penacony'}
+        # )
         self.instanceNameCard = PushSettingCardInstance(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.PALETTE,
-            self.tr("콘텐츠 이름"),
+            self.tr("副本名称"),
             "instance_names",
             "./assets/config/instance_names.json"
         )
@@ -68,303 +100,342 @@ class SettingInterface(ScrollArea):
             "max_calyx_per_round_num_of_attempts",
             [1, 6],
             FIF.HISTORY,
-            self.tr("라운드당 의식의 고치 도전 횟수"),
+            self.tr("每轮拟造花萼挑战次数"),
             '',
         )
         self.breakDownLevelFourRelicsetEnableCard = SwitchSettingCard1(
             FIF.FILTER,
-            self.tr('4성 유물 자동 분해'),
-            self.tr('부식의 동굴, 시뮬레이션 우주, 고치(歷戰餘響) 완료 후 4성 이하 유물 자동 분해'),
+            self.tr('自动分解四星遗器'),
+            self.tr('侵蚀隧洞、饰品提取、历战余响和模拟宇宙完成后自动分解四星及以下遗器'),
             "break_down_level_four_relicset"
         )
         self.instanceTeamEnableCard = SwitchSettingCardTeam(
             FIF.EDIT,
-            self.tr('자동 파티 교체'),
+            self.tr('自动切换队伍'),
             None,
             "instance_team_enable",
             "instance_team_number"
         )
+        # self.instanceTeamNumberCard = ComboBoxSettingCard1(
+        #     "instance_team_number",
+        #     FIF.FLAG,
+        #     self.tr('队伍编号'),
+        #     None,
+        #     texts=['3', '4', '5', '6', '7']
+        # )
         self.mergeImmersifierEnableCard = SwitchSettingCardImmersifier(
             FIF.BASKETBALL,
-            self.tr('몰입기 우선 합성'),
-            "지정된 한도에 도달하면 중지되며, 매일 일정 횟수의 시뮬레이션 우주와 연동하여 순환 가능",
+            self.tr('优先合成沉浸器'),
+            "达到指定上限后停止，可搭配每天一定次数的模拟宇宙实现循环",
             "merge_immersifier"
         )
         self.useReservedTrailblazePowerEnableCard = SwitchSettingCard1(
             FIF.HEART,
-            self.tr('예비 개척력 사용'),
-            "단일 최대 300pt, 전부 사용하려면 '임무 완료 후' 옵션을 '순환'으로 변경한 후 '전체 실행'을 클릭해야 합니다",
+            self.tr('使用后备开拓力'),
+            "单次上限300点，全部使用需要将“任务完成后”选项修改为“循环”，然后点击“完整运行”",
             "use_reserved_trailblaze_power"
         )
         self.useFuelEnableCard = SwitchSettingCard1(
             FIF.CAFE,
-            self.tr('연료 사용'),
-            "단일 최대 5개, 전부 사용하려면 '임무 완료 후' 옵션을 '순환'으로 변경한 후 '전체 실행'을 클릭해야 합니다",
+            self.tr('使用燃料'),
+            "单次上限5个，全部使用需要将“任务完成后”选项修改为“循环”，然后点击“完整运行”",
             "use_fuel"
         )
         self.echoofwarEnableCard = SwitchSettingCardEchoofwar(
             FIF.MEGAPHONE,
-            self.tr('고치(歷戰餘響) 활성화'),
-            "매주 개척력을 우선적으로 사용하여 '고치(歷戰餘響)'를 3회 완료합니다. 특정 요일 이후부터 실행하도록 설정할 수 있으며, 전체 실행 시에만 적용됩니다",
+            self.tr('启用历战余响'),
+            "每周体力优先完成三次「历战余响」，支持配置从周几后开始执行，仅限完整运行生效",
             "echo_of_war_enable"
         )
         self.echoofwarRunTimeCard = PushSettingCardDate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.DATE_TIME,
-            self.tr("마지막 고치(歷戰餘響) 완료 시간"),
+            self.tr("上次完成历战余响的时间"),
             "echo_of_war_timestamp"
         )
+        # self.echoofwarStartDayOfWeekCard = RangeSettingCard1(
+        #     "echo_of_war_start_day_of_week",
+        #     [1, 7],
+        #     FIF.HISTORY,
+        #     self.tr("周几开始执行【历战余响】"),
+        #     self.tr("假设值为4，那么周1、2、3不执行「历战余响」，周4、5、6、7则执行"),
+        # )
 
-        self.BorrowGroup = SettingCardGroup(self.tr("지원 설정"), self.scrollWidget)
+        self.BorrowGroup = SettingCardGroup(self.tr("支援设置"), self.scrollWidget)
         self.borrowEnableCard = SwitchSettingCard1(
             FIF.PIN,
-            self.tr('지원 캐릭터 사용 활성화'),
+            self.tr('启用使用支援角色'),
             '',
             "borrow_enable"
         )
         self.borrowCharacterEnableCard = SwitchSettingCard1(
             FIF.UNPIN,
-            self.tr('지원 캐릭터 강제 사용'),
-            self.tr('일일 훈련에 요구사항이 없더라도 항상 지원 캐릭터를 사용합니다'),
+            self.tr('强制使用支援角色'),
+            self.tr('无论何时都要使用支援角色，即使日常实训中没有要求'),
             "borrow_character_enable"
         )
         self.borrowFriendsCard = PushSettingCardFriends(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FLAG,
-            self.tr("지원 목록"),
+            self.tr("支援列表"),
             "borrow_friends"
         )
         self.borrowScrollTimesCard = RangeSettingCard1(
             "borrow_scroll_times",
             [1, 10],
             FIF.HISTORY,
-            self.tr("스크롤 검색 횟수"),
+            self.tr("滚动查找次数"),
             '',
         )
+        # self.borrowCharacterFromCard = PushSettingCardEval(
+        #     self.tr('修改'),
+        #     FIF.PEOPLE,
+        #     self.tr("指定好友的支援角色（填写用户名，模糊匹配模式）"),
+        #     "borrow_character_from"
+        # )
+        # self.borrowCharacterInfoCard = PrimaryPushSettingCard(
+        #     self.tr('打开角色文件夹'),
+        #     FIF.INFO,
+        #     self.tr("↓↓支援角色↓↓"),
+        #     self.tr("角色对应的英文名字可以在 \"March7thAssistant\\assets\\images\\share\\character\" 中查看")
+        # )
+        # self.borrowCharacterCard = PushSettingCardEval(
+        #     self.tr('修改'),
+        #     FIF.ARROW_DOWN,
+        #     self.tr("支援角色优先级（从高到低）"),
+        #     "borrow_character"
+        # )
 
-        self.DailyGroup = SettingCardGroup(self.tr("일일 설정"), self.scrollWidget)
+        self.DailyGroup = SettingCardGroup(self.tr("日常设置"), self.scrollWidget)
         self.dispatchEnableCard = SwitchSettingCard1(
             FIF.STOP_WATCH,
-            self.tr('의뢰 보상 수령'),
+            self.tr('领取委托奖励'),
             None,
             "reward_dispatch_enable"
         )
         self.mailEnableCard = SwitchSettingCard1(
             FIF.MAIL,
-            self.tr('우편 보상 수령'),
+            self.tr('领取邮件奖励'),
             None,
             "reward_mail_enable"
         )
         self.assistEnableCard = SwitchSettingCard1(
             FIF.BRUSH,
-            self.tr('지원 보상 수령'),
+            self.tr('领取支援奖励'),
             None,
             "reward_assist_enable"
         )
         self.dailyEnableCard = SwitchSettingCard1(
             FIF.CALENDAR,
-            self.tr('일일 훈련 활성화'),
-            "비활성화 시, 수동으로 개척력을 소모하거나 매일 시뮬레이션 우주 1회를 통해 500 활력도를 채울 수 있습니다",
+            self.tr('启用每日实训'),
+            "关闭后可通过手动配置清体力或每天一次模拟宇宙来完成500活跃度",
             "daily_enable"
         )
         self.dailyMaterialEnableCard = SwitchSettingCard1(
             FIF.CHECKBOX,
-            self.tr('"재료 합성"으로 임무 완료'),
-            "가방에 '소멸의 코어'가 충분히 있는지 확인하여 '미광의 코어'를 합성하세요",
+            self.tr('通过 “合成材料” 完成任务'),
+            "请确保背包中有足够的 “熄灭原核” 用于合成 “微光原核” ",
             "daily_material_enable"
         )
         self.dailyHimekoTryEnableCard = SwitchSettingCard1(
             FIF.CHECKBOX,
-            self.tr('"히메코 체험"으로 임무 완료'),
+            self.tr('通过 “姬子试用” 完成任务'),
             "",
             "daily_himeko_try_enable"
         )
         self.dailyMemoryOneEnableCard = SwitchSettingCard1(
             FIF.CHECKBOX,
-            self.tr('"망각의 정원 1층"으로 임무 완료'),
-            "혼돈의 기억을 해금하고 파티를 설정한 후에 이 옵션을 켜주세요. 일부 임무는 최대 세 번 반복해야 할 수 있습니다",
+            self.tr('通过 “回忆一” 完成任务'),
+            "请解锁混沌回忆并配置了队伍后再打开该选项，部分任务需要反复运行至多三次",
             "daily_memory_one_enable"
         )
         self.dailyMemoryOneTeamCard = PushSettingCardTeam(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FLAG,
-            self.tr("망각의 정원 1층 파티"),
+            self.tr("回忆一队伍"),
             "daily_memory_one_team"
         )
         self.lastRunTimeCard = PushSettingCardDate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.DATE_TIME,
-            self.tr("마지막 일일 임무 확인 시간"),
+            self.tr("上次检测日常的时间"),
             "last_run_timestamp"
         )
 
-        self.ActivityGroup = SettingCardGroup(self.tr("이벤트 설정"), self.scrollWidget)
+        self.ActivityGroup = SettingCardGroup(self.tr("活动设置"), self.scrollWidget)
         self.activityEnableCard = SwitchSettingCard1(
             FIF.CERTIFICATE,
-            self.tr('이벤트 확인 활성화'),
+            self.tr('启用活动检测'),
             None,
             "activity_enable"
         )
         self.activityDailyCheckInEnableCard = SwitchSettingCard1(
             FIF.COMPLETED,
-            self.tr('일일 출석체크 활성화'),
-            "자동으로 '별의 궤도 전용티켓' 또는 '성옥'을 수령하며, 별의 선물, 별빛의 예도, 축제 기념 선물 이벤트를 포함합니다",
+            self.tr('启用每日签到'),
+            "自动领取「星轨专票」或「星琼」，包含巡星之礼、巡光之礼和庆典祝礼活动",
             "activity_dailycheckin_enable"
         )
         self.activityGardenOfPlentyEnableCard = SwitchSettingCardGardenofplenty(
             FIF.CALORIES,
-            self.tr('만발의 정원 활성화'),
-            "드랍 2배 이벤트 시 '의식의 고치'를 우선적으로 진행합니다",
+            self.tr('启用花藏繁生'),
+            "存在双倍次数时体力优先「拟造花萼」",
             "activity_gardenofplenty_enable"
         )
         self.activityRealmOfTheStrangeEnableCard = SwitchSettingCard1(
             FIF.CALORIES,
-            self.tr('기묘한 영역 활성화'),
-            "드랍 2배 이벤트 시 '부식의 동굴'을 우선적으로 진행합니다",
+            self.tr('启用异器盈界'),
+            "存在双倍次数时体力优先「侵蚀隧洞」",
             "activity_realmofthestrange_enable"
         )
         self.activityPlanarFissureEnableCard = SwitchSettingCard1(
             FIF.CALORIES,
-            self.tr('차원 분열 활성화'),
-            "드랍 2배 이벤트 시 '시뮬레이션 우주'를 우선적으로 진행합니다",
+            self.tr('启用位面分裂'),
+            "存在双倍次数时体力优先「饰品提取」",
             "activity_planarfissure_enable"
         )
 
-        self.FightGroup = SettingCardGroup(self.tr("필드 파밍"), self.scrollWidget)
+        self.FightGroup = SettingCardGroup(self.tr("锄大地"), self.scrollWidget)
         self.fightEnableCard = SwitchSettingCard1(
             FIF.BUS,
-            self.tr('필드 파밍 (Fhoe-Rail) 활성화'),
+            self.tr('启用锄大地 (Fhoe-Rail)'),
             "",
             "fight_enable"
         )
         self.fightOperationModeCard = ComboBoxSettingCard2(
             "fight_operation_mode",
             FIF.COMMAND_PROMPT,
-            self.tr('실행 모드'),
+            self.tr('运行模式'),
             '',
-            texts={'통합': 'exe', '소스 코드': 'source'}
+            texts={'集成': 'exe', '源码': 'source'}
         )
         self.fightTimeoutCard = RangeSettingCard1(
             "fight_timeout",
             [1, 10],
             FIF.HISTORY,
-            self.tr("필드 파밍 시간 초과"),
-            self.tr("설정된 시간을 초과하면 강제 종료 (단위: 시간)"),
+            self.tr("锄大地超时"),
+            self.tr("超过设定时间强制停止（单位小时）"),
         )
         self.fightTeamEnableCard = SwitchSettingCardTeam(
             FIF.EDIT,
-            self.tr('자동 파티 교체'),
+            self.tr('自动切换队伍'),
             None,
             "fight_team_enable",
             "fight_team_number"
         )
+        # self.fightTeamNumberCard = ComboBoxSettingCard1(
+        #     "fight_team_number",
+        #     FIF.FLAG,
+        #     self.tr('队伍编号'),
+        #     None,
+        #     texts=['3', '4', '5', '6', '7']
+        # )
         self.FightRunTimeCard = PushSettingCardDate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.DATE_TIME,
-            self.tr("마지막 필드 파밍 실행 시간"),
+            self.tr("上次运行锄大地的时间"),
             "fight_timestamp"
         )
         self.fightAllowMapBuyCard = ComboBoxSettingCard2(
             "fight_allow_map_buy",
             FIF.GLOBE,
-            self.tr('토큰 및 만료된 우편물 구매'),
+            self.tr('购买代币与过期邮包'),
             '',
-            texts={"설정 안 함": "不配置", "활성화": True, "비활성화": False}
+            texts={"不配置": "不配置", "启用": True, "停用": False}
         )
         self.fightAllowSnackBuyCard = ComboBoxSettingCard2(
             "fight_allow_snack_buy",
             FIF.GLOBE,
-            self.tr('비술 간식 구매 및 합성'),
+            self.tr('购买秘技零食并合成零食'),
             '',
-            texts={"설정 안 함": "不配置", "활성화": True, "비활성화": False}
+            texts={"不配置": "不配置", "启用": True, "停用": False}
         )
         self.fightMainMapCard = ComboBoxSettingCard2(
             "fight_main_map",
             FIF.GLOBE,
-            self.tr('우선 행성'),
+            self.tr('优先星球'),
             '',
-            texts={"설정 안 함": "0", "우주정거장": "1", "야릴로-VI": "2", "선주": "3", "페나코니": "4", "온파로스": 5}
+            texts={"不配置": "0", "空间站": "1", "雅利洛": "2", "仙舟": "3", "匹诺康尼": "4", "翁法罗斯": 5}
         )
 
-        self.UniverseGroup = SettingCardGroup(self.tr("시뮬레이션 우주"), self.scrollWidget)
+        self.UniverseGroup = SettingCardGroup(self.tr("模拟宇宙"), self.scrollWidget)
         self.universeEnableCard = SwitchSettingCard1(
             FIF.VPN,
-            self.tr('시뮬레이션 우주 (Auto_Simulated_Universe) 활성화'),
+            self.tr('启用模拟宇宙 (Auto_Simulated_Universe)'),
             "",
             "universe_enable"
         )
         self.universeOperationModeCard = ComboBoxSettingCard2(
             "universe_operation_mode",
             FIF.COMMAND_PROMPT,
-            self.tr('실행 모드'),
+            self.tr('运行模式'),
             '',
-            texts={'통합': 'exe', '소스 코드': 'source'}
+            texts={'集成': 'exe', '源码': 'source'}
         )
         self.universeCategoryCard = ComboBoxSettingCard2(
             "universe_category",
             FIF.COMMAND_PROMPT,
-            self.tr('카테고리'),
+            self.tr('类别'),
             '',
-            texts={'차분 우주': 'divergent', '시뮬레이션 우주': 'universe'}
+            texts={'差分宇宙': 'divergent', '模拟宇宙': 'universe'}
         )
         self.universeDisableGpuCard = SwitchSettingCard1(
             FIF.COMMAND_PROMPT,
-            self.tr('GPU 가속 비활성화'),
-            self.tr('차분 우주가 정상적으로 실행되지 않을 때 이 옵션을 시도해볼 수 있습니다'),
+            self.tr('禁用GPU加速'),
+            self.tr('差分宇宙无法正常运行时，可尝试打开此选项'),
             "universe_disable_gpu"
         )
         self.universeTimeoutCard = RangeSettingCard1(
             "universe_timeout",
             [1, 24],
             FIF.HISTORY,
-            self.tr("시뮬레이션 우주 시간 초과"),
-            self.tr("설정된 시간을 초과하면 강제 종료 (단위: 시간)"),
+            self.tr("模拟宇宙超时"),
+            self.tr("超过设定时间强制停止（单位小时）"),
         )
         self.universeRunTimeCard = PushSettingCardDate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.DATE_TIME,
-            self.tr("마지막 시뮬레이션 우주 실행 시간"),
+            self.tr("上次运行模拟宇宙的时间"),
             "universe_timestamp"
         )
         self.weeklyDivergentEnableCard = SwitchSettingCard1(
             FIF.VPN,
-            self.tr('매주 차분 우주 1회 우선 실행'),
-            "주기성 연산을 실행하려면 '홈 → 시뮬레이션 우주 → 원본 실행'에서 직접 '주기성 연산'을 선택해야 합니다",
+            self.tr('每周优先运行一次差分宇宙'),
+            "如需执行周期演算，请自行打开 “主页→模拟宇宙→原版运行”，然后勾选“周期演算”",
             "weekly_divergent_enable"
         )
         self.weeklyDivergentRunTimeCard = PushSettingCardDate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.DATE_TIME,
-            self.tr("마지막 주간 차분 우주 실행 시간"),
+            self.tr("上次运行每周一次差分宇宙的时间"),
             "weekly_divergent_timestamp"
         )
         self.universeBonusEnableCard = SwitchSettingCard1(
             FIF.IOT,
-            self.tr('몰입 보상 수령/장신구 추출 실행'),
-            "카테고리가 '시뮬레이션 우주'일 때 자동으로 몰입 보상을 수령합니다. '차분 우주'일 때는 점수 보상 수령 후 자동으로 장신구 추출을 실행하여 몰입기를 소모합니다.",
+            self.tr('领取沉浸奖励/执行饰品提取'),
+            "类别为“模拟宇宙”时，自动领取沉浸奖励。类别为“差分宇宙”时，在领取积分奖励后自动执行饰品提取消耗沉浸器。",
             "universe_bonus_enable"
         )
         self.universeFrequencyCard = ComboBoxSettingCard2(
             "universe_frequency",
             FIF.MINIMIZE,
-            self.tr('실행 빈도'),
+            self.tr('运行频率'),
             '',
-            texts={'매주': 'weekly', '매일': 'daily'}
+            texts={'每周': 'weekly', '每天': 'daily'}
         )
         self.universeCountCard = RangeSettingCard1(
             "universe_count",
             [0, 34],
             FIF.HISTORY,
-            self.tr("실행 횟수"),
-            self.tr("주의: 중간에 중단하면 카운트되지 않습니다. 0은 지정하지 않음을 의미하며, 시뮬레이션 우주 원본 로직을 사용합니다"),
+            self.tr("运行次数"),
+            self.tr("注意中途停止不会计数，0 代表不指定，使用模拟宇宙原版逻辑"),
         )
         fates = {}
-        for a in ["설정 안 함", "보존", "기억", "공허", "풍요", "수렵", "파멸", "환락", "번식", "지식"]:
+        for a in ["不配置", "存护", "记忆", "虚无", "丰饶", "巡猎", "毁灭", "欢愉", "繁育", "智识"]:
             fates[a] = a
         self.universeFateCard = ComboBoxSettingCard2(
             "universe_fate",
             FIF.PIE_SINGLE,
-            self.tr('운명의 길 (시뮬레이션 우주에만 적용)'),
+            self.tr('命途（仅模拟宇宙生效）'),
             '',
             texts=fates
         )
@@ -372,196 +443,209 @@ class SettingInterface(ScrollArea):
             "universe_difficulty",
             [0, 5],
             FIF.HISTORY,
-            self.tr("난이도 (0은 설정 안 함, 시뮬레이션 우주에만 적용)"),
+            self.tr("难度 (0为不配置，仅模拟宇宙生效)"),
             self.tr(""),
         )
 
-        self.ForgottenhallGroup = SettingCardGroup(self.tr("혼돈의 기억"), self.scrollWidget)
+        self.ForgottenhallGroup = SettingCardGroup(self.tr("混沌回忆"), self.scrollWidget)
         self.forgottenhallEnableCard = SwitchSettingCard1(
             FIF.SPEED_HIGH,
-            self.tr('혼돈의 기억 활성화'),
+            self.tr('启用混沌回忆'),
             "",
             "forgottenhall_enable"
         )
         self.forgottenhallLevelCard = PushSettingCardEval(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.MINIMIZE,
-            self.tr("스테이지 범위"),
+            self.tr("关卡范围"),
             "forgottenhall_level"
         )
+        # self.forgottenhallRetriesCard = RangeSettingCard1(
+        #     "forgottenhall_retries",
+        #     [0, 10],
+        #     FIF.REMOVE_FROM,
+        #     self.tr("重试次数"),
+        # )
         self.forgottenhallTeam1Card = PushSettingCardTeam(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FLAG,
-            self.tr("혼돈의 기억 파티 1"),
+            self.tr("混沌回忆队伍1"),
             "forgottenhall_team1"
         )
         self.forgottenhallTeam2Card = PushSettingCardTeam(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FLAG,
-            self.tr("혼돈의 기억 파티 2"),
+            self.tr("混沌回忆队伍2"),
             "forgottenhall_team2"
         )
         self.forgottenhallRunTimeCard = PushSettingCardDate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.DATE_TIME,
-            self.tr("마지막 혼돈의 기억 실행 시간"),
+            self.tr("上次运行混沌回忆的时间"),
             "forgottenhall_timestamp"
         )
 
-        self.PureFictionGroup = SettingCardGroup(self.tr("허구 서사"), self.scrollWidget)
+        self.PureFictionGroup = SettingCardGroup(self.tr("虚构叙事"), self.scrollWidget)
         self.purefictionEnableCard = SwitchSettingCard1(
             FIF.SPEED_HIGH,
-            self.tr('허구 서사 활성화'),
+            self.tr('启用虚构叙事'),
             "",
             "purefiction_enable"
         )
         self.purefictionLevelCard = PushSettingCardEval(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.MINIMIZE,
-            self.tr("스테이지 범위"),
+            self.tr("关卡范围"),
             "purefiction_level"
         )
         self.purefictionTeam1Card = PushSettingCardTeam(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FLAG,
-            self.tr("허구 서사 파티 1"),
+            self.tr("虚构叙事队伍1"),
             "purefiction_team1"
         )
         self.purefictionTeam2Card = PushSettingCardTeam(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FLAG,
-            self.tr("허구 서사 파티 2"),
+            self.tr("虚构叙事队伍2"),
             "purefiction_team2"
         )
         self.purefictionRunTimeCard = PushSettingCardDate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.DATE_TIME,
-            self.tr("마지막 허구 서사 실행 시간"),
+            self.tr("上次运行虚构叙事的时间"),
             "purefiction_timestamp"
         )
 
-        self.ApocalypticGroup = SettingCardGroup(self.tr("종말"), self.scrollWidget)
+        self.ApocalypticGroup = SettingCardGroup(self.tr("末日"), self.scrollWidget)
         self.ApocalypticEnableCard = SwitchSettingCard1(
             FIF.SPEED_HIGH,
-            self.tr('종말의 환영 활성화'),
+            self.tr('启用末日幻影'),
             "",
             "apocalyptic_enable"
         )
         self.ApocalypticLevelCard = PushSettingCardEval(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.MINIMIZE,
-            self.tr("스테이지 범위"),
+            self.tr("关卡范围"),
             "apocalyptic_level"
         )
         self.ApocalypticTeam1Card = PushSettingCardTeam(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FLAG,
-            self.tr("종말의 환영 파티 1"),
+            self.tr("末日幻影队伍1"),
             "apocalyptic_team1"
         )
         self.ApocalypticTeam2Card = PushSettingCardTeam(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FLAG,
-            self.tr("종말의 환영 파티 2"),
+            self.tr("末日幻影队伍2"),
             "apocalyptic_team2"
         )
         self.ApocalypticRunTimeCard = PushSettingCardDate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.DATE_TIME,
-            self.tr("마지막 종말의 환영 실행 시간"),
+            self.tr("上次运行末日幻影的时间"),
             "apocalyptic_timestamp"
         )
 
-        self.ProgramGroup = SettingCardGroup(self.tr('프로그램 설정'), self.scrollWidget)
+        self.ProgramGroup = SettingCardGroup(self.tr('程序设置'), self.scrollWidget)
         self.logLevelCard = ComboBoxSettingCardLog(
             "log_level",
             FIF.TAG,
-            self.tr('로그 레벨'),
+            self.tr('日志等级'),
             "",
-            texts={'간략히': 'INFO', '자세히': 'DEBUG'}
+            texts={'简洁': 'INFO', '详细': 'DEBUG'}
         )
         self.gamePathCard = PushSettingCard(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.GAME,
-            self.tr("게임 경로"),
+            self.tr("游戏路径"),
             cfg.game_path
         )
+        # self.importConfigCard = PushSettingCard(
+        #     self.tr('导入'),
+        #     FIF.ADD_TO,
+        #     self.tr('导入配置'),
+        #     self.tr('选择需要导入的 config.yaml 文件（重启后生效）')
+        # )
         self.checkUpdateCard = SwitchSettingCard1(
             FIF.SYNC,
-            self.tr('시작 시 업데이트 확인'),
-            "새 버전은 더 안정적이고 많은 기능을 제공합니다 (활성화 권장)",
+            self.tr('启动时检测更新'),
+            "新版本将更加稳定并拥有更多功能（建议启用）",
             "check_update"
         )
         self.pauseAfterSuccess = SwitchSettingCard1(
             FIF.SYNC,
-            self.tr('성공 후 프로그램 일시 정지'),
-            "체크 시, 순환 모드가 아니면 실행 성공 후 프로그램이 일시 정지됩니다.",
+            self.tr('成功后暂停程序'),
+            "如果勾选，除非循环模式，执行成功后暂停程序。",
             "pause_after_success"
         )
         self.exitAfterFailure = SwitchSettingCard1(
             FIF.SYNC,
-            self.tr('실패 시 바로 종료'),
-            "체크 시, 실패하면 바로 종료되고, 그렇지 않으면 실패 후 프로그램이 일시 정지됩니다.",
+            self.tr('失败后直接退出'),
+            "如果勾选，那么失败后直接退出，否则失败后暂停程序。",
             "exit_after_failure"
         )
         self.afterFinishCard = ComboBoxSettingCard2(
             "after_finish",
             FIF.POWER_BUTTON,
-            self.tr('임무 완료 후'),
-            self.tr('여기서 "종료"는 게임 종료를, "순환"은 24/7 무인 자동 순환 실행을 의미합니다 (전체 실행 시에만 적용)'),
-            texts={'없음': 'None', '종료': 'Exit', '순환': 'Loop',
-                   'PC 종료': 'Shutdown', '절전': 'Sleep', '최대 절전': 'Hibernate', '재시작': 'Restart', '로그오프': 'Logoff', '스크립트 실행': 'RunScript'}
+            self.tr('任务完成后'),
+            self.tr('其中“退出”指退出游戏，“循环”指7×24小时无人值守循环运行程序（仅限完整运行生效）'),
+            texts={'无': 'None', '退出': 'Exit', '循环': 'Loop',
+                   '关机': 'Shutdown', '睡眠': 'Sleep', '休眠': 'Hibernate', '重启': 'Restart', '注销': 'Logoff', '运行脚本': 'RunScript'}
         )
         self.ScriptPathCard = PushSettingCard(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.CODE,
-            self.tr("스크립트 또는 프로그램 경로 (스크립트 실행 선택 시 적용)"),
+            self.tr("脚本或程序路径(选择运行脚本时生效)"),
             cfg.script_path
         )
         self.loopModeCard = ComboBoxSettingCard2(
             "loop_mode",
             FIF.COMMAND_PROMPT,
-            self.tr('순환 모드'),
+            self.tr('循环模式'),
             '',
-            texts={'개척력 기준': 'power', '예약 작업': 'scheduled'}
+            texts={'根据开拓力': 'power', '定时任务': 'scheduled'}
         )
         self.scheduledCard = TimePickerSettingCard1(
             "scheduled_time",
             FIF.DATE_TIME,
-            "예약 작업 시간",
+            "定时任务时间",
         )
         self.playAudioCard = SwitchSettingCard1(
             FIF.ALBUM,
-            self.tr('소리 알림'),
-            self.tr('임무 완료 후 폼폼 차장이 노래로 알려줍니다!'),
+            self.tr('声音提示'),
+            self.tr('任务完成后列车长唱歌提示帕！'),
             "play_audio"
         )
         self.powerLimitCard = RangeSettingCard1(
             "power_limit",
             [10, 300],
             FIF.HEART,
-            self.tr("순환 실행 재시작에 필요한 개척력"),
-            self.tr("게임 초기화 후 우선순위가 더 높습니다"),
+            # self.tr("循环运行再次启动所需开拓力（游戏刷新后优先级更高）"),
+            self.tr("循环运行再次启动所需开拓力"),
+            self.tr("游戏刷新后优先级更高"),
         )
         self.refreshHourEnableCard = RangeSettingCard1(
             "refresh_hour",
             [0, 23],
             FIF.DATE_TIME,
-            self.tr("게임 초기화 시간"),
-            self.tr("순환 실행 및 임무 상태 판단에 사용됩니다 (기본값 새벽 4시)"),
+            self.tr("游戏刷新时间"),
+            self.tr("用于循环运行及判断任务状态，默认凌晨四点"),
         )
 
-        self.NotifyGroup = SettingCardGroup(self.tr("알림 메시지"), self.scrollWidget)
+        self.NotifyGroup = SettingCardGroup(self.tr("消息推送"), self.scrollWidget)
         self.testNotifyCard = PrimaryPushSettingCard(
-            self.tr('메시지 보내기'),
+            self.tr('发送消息'),
             FIF.RINGER,
-            self.tr("알림 메시지 테스트"),
+            self.tr("测试消息推送"),
             ""
         )
         self.notifyTemplateCard = PushSettingCardNotifyTemplate(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.FONT_SIZE,
-            self.tr("알림 메시지 형식"),
+            self.tr("消息推送格式"),
             "notify_template"
         )
 
@@ -571,7 +655,19 @@ class SettingInterface(ScrollArea):
             "telegram": FIF.AIRPLANE,
             "serverchanturbo": FIF.ROBOT,
             "serverchan3": FIF.ROBOT,
+            # "bark": FIF.MAIL,
             "smtp": FIF.MAIL,
+            # "dingtalk": FIF.MAIL,
+            # "pushplus": FIF.MAIL,
+            # "wechatworkapp": FIF.MAIL,
+            # "wechatworkbot": FIF.MAIL,
+            # "onebot": FIF.MAIL,
+            # "gocqhttp": FIF.MAIL,
+            # "gotify": FIF.MAIL,
+            # "discord": FIF.MAIL,
+            # "pushdeer": FIF.MAIL,
+            # "lark": FIF.MAIL,
+            # "custom": FIF.MAIL
         }
         self.notifySupportImage = ["telegram", "matrix", "smtp", "wechatworkapp", "onebot", "gocqhttp", "lark", "custom"]
 
@@ -581,83 +677,83 @@ class SettingInterface(ScrollArea):
 
                 notifyEnableCard = SwitchSettingCardNotify(
                     self.notifyLogoDict[notifier_name] if notifier_name in self.notifyLogoDict else FIF.MAIL,
-                    self.tr(f'{notifier_name.capitalize()} 알림 활성화 {"(이미지 지원)"if notifier_name in self.notifySupportImage else ""}'),
+                    self.tr(f'启用 {notifier_name.capitalize()} 通知 {"（支持图片）"if notifier_name in self.notifySupportImage else ""}'),
                     notifier_name,
                     key
                 )
                 self.notifyEnableGroup.append(notifyEnableCard)
 
-        self.MiscGroup = SettingCardGroup(self.tr("기타"), self.scrollWidget)
+        self.MiscGroup = SettingCardGroup(self.tr("杂项"), self.scrollWidget)
         self.autoBattleDetectEnableCard = SwitchSettingCard1(
             FIF.ROBOT,
-            self.tr('자동 전투 감지 활성화'),
-            "개척력 소모 및 도전 콘텐츠에서만 작동하며, 게임 시작 전 자동으로 레지스트리 값을 확인하고 수정합니다",
+            self.tr('启用自动战斗检测'),
+            "只对清体力和逐光捡金场景生效，并在启动游戏前自动检测并修改注册表值",
             "auto_battle_detect_enable"
         )
         self.autoSetResolutionEnableCard = SwitchSettingCard1(
             FIF.FULL_SCREEN,
-            self.tr('자동 해상도 변경 및 자동 HDR 비활성화 활성화'),
-            "소프트웨어를 통해 게임을 실행하면 자동으로 1920x1080 해상도로 변경하고 자동 HDR을 비활성화합니다. 수동 실행에는 영향을 주지 않습니다 (글로벌 서버 미테스트)",
+            self.tr('启用自动修改分辨率并关闭自动 HDR'),
+            "通过软件启动游戏会自动修改 1920x1080 分辨率并关闭自动 HDR，不影响手动启动游戏（未测试国际服）",
             "auto_set_resolution_enable"
         )
         self.autoSetGamePathEnableCard = SwitchSettingCard1(
             FIF.GAME,
-            self.tr('게임 경로 자동 설정 활성화'),
-            "바로가기, 공식 런처, 실행 중인 게임 프로세스 등을 통해 게임 경로를 자동으로 설정합니다 (글로벌 서버 미테스트)",
+            self.tr('启用自动配置游戏路径'),
+            "通过快捷方式、官方启动器、运行中的游戏进程等方式尝试自动配置游戏路径（未测试国际服）",
             "auto_set_game_path_enable"
         )
         self.allScreensCard = SwitchSettingCard1(
             FIF.ZOOM,
-            self.tr('다중 모니터에서 스크린샷'),
-            "기본적으로 활성화되어 있으며, 다중 모니터를 사용 중이고 스크린샷이 정상적으로 작동하지 않으면 이 옵션을 비활성화하고 다시 시도하세요",
+            self.tr('在多显示器上进行截屏'),
+            "默认开启，如果正在使用多显示器且无法正常截屏请关闭此选项重试",
             "all_screens"
         )
         self.StartMarch7thAssistantCard = StartMarch7thAssistantSwitchSettingCard(
             FIF.GAME,
-            self.tr('사용자 로그인 시 시작'),
-            "작업 스케줄러를 통해 부팅 후 자동으로 전체 실행 모드를 실행합니다 (PC 자동 로그인을 별도로 설정해야 할 수 있습니다)"
+            self.tr('在用户登录时启动'),
+            "通过任务计划程序在开机后自动执行完整运行模式（可能还需要自行配置电脑无需输入密码自动登录）"
         )
         self.hotkeyCard = SwitchSettingCardHotkey(
             FIF.SETTING,
-            self.tr('단축키 수정'),
-            "비술, 지도, 워프 등 단축키 설정"
+            self.tr('修改按键'),
+            "配置秘技、地图、跃迁等按键设置"
         )
 
-        self.AboutGroup = SettingCardGroup(self.tr('정보'), self.scrollWidget)
+        self.AboutGroup = SettingCardGroup(self.tr('关于'), self.scrollWidget)
         self.githubCard = PrimaryPushSettingCard(
-            self.tr('프로젝트 홈페이지'),
+            self.tr('项目主页'),
             FIF.GITHUB,
-            self.tr('프로젝트 홈페이지'),
+            self.tr('项目主页'),
             "https://github.com/moesnow/March7thAssistant"
         )
         self.qqGroupCard = PrimaryPushSettingCard(
-            self.tr('그룹 채팅 참여'),
+            self.tr('加入群聊'),
             FIF.EXPRESSIVE_INPUT_ENTRY,
-            self.tr('QQ 그룹'),
+            self.tr('QQ群'),
             ""
         )
         self.feedbackCard = PrimaryPushSettingCard(
-            self.tr('피드백 제공'),
+            self.tr('提供反馈'),
             FIF.FEEDBACK,
-            self.tr('피드백 제공'),
-            self.tr('March7thAssistant 개선에 도움을 주세요')
+            self.tr('提供反馈'),
+            self.tr('帮助我们改进 March7thAssistant')
         )
         self.aboutCard = PrimaryPushSettingCard(
-            self.tr('업데이트 확인'),
+            self.tr('检查更新'),
             FIF.INFO,
-            self.tr('정보'),
-            self.tr('현재 버전: ') + " " + cfg.version
+            self.tr('关于'),
+            self.tr('当前版本：') + " " + cfg.version
         )
         self.updateSourceCard = ComboBoxSettingCardUpdateSource(
             "update_source",
             FIF.SPEED_HIGH,
-            '업데이트 소스',
+            '更新源',
             self.parent,
             '',
-            texts={'해외 소스': 'GitHub', 'Mirror 酱': 'MirrorChyan'}
+            texts={'海外源': 'GitHub', 'Mirror 酱': 'MirrorChyan'}
         )
         self.mirrorchyanCdkCard = PushSettingCardMirrorchyan(
-            self.tr('수정'),
+            self.tr('修改'),
             FIF.BOOK_SHELF,
             self.tr("Mirror 酱 CDK"),
             self.parent,
@@ -665,38 +761,46 @@ class SettingInterface(ScrollArea):
         )
         self.updatePrereleaseEnableCard = SwitchSettingCard1(
             FIF.TRAIN,
-            self.tr('미리보기 버전 업데이트 채널 가입 (미리보기 버전은 Mirror 酱 미지원)'),
+            self.tr('加入预览版更新渠道（预览版暂不支持Mirror酱）'),
             "",
             "update_prerelease_enable"
         )
         self.updateFullEnableCard = SwitchSettingCard1(
             FIF.GLOBE,
-            self.tr('업데이트 시 전체 패키지 다운로드 (부분 패키지는 Mirror 醬 미지원)'),
-            "시뮬레이션 우주, 필드 파밍 등을 포함하지만 압축 파일 크기가 더 큽니다",
+            self.tr('更新时下载完整包（非完整包暂不支持Mirror酱）'),
+            "包含模拟宇宙和锄大地等，但压缩包体积更大",
             "update_full_enable"
         )
 
     def __initLayout(self):
         self.settingLabel.move(36, 30)
         self.pivot.move(40, 80)
+        # self.title_area.move(36, 80)
+        # self.vBoxLayout.addWidget(self.pivot, 0, Qt.AlignTop)
         self.vBoxLayout.addWidget(self.stackedWidget, 0, Qt.AlignTop)
         self.vBoxLayout.setContentsMargins(36, 0, 36, 0)
 
         self.PowerGroup.addSettingCard(self.instanceTypeCard)
+        # self.PowerGroup.addSettingCard(self.calyxGoldenPreferenceCard)
         self.PowerGroup.addSettingCard(self.instanceNameCard)
         self.PowerGroup.addSettingCard(self.maxCalyxPerRoundNumOfAttempts)
         self.PowerGroup.addSettingCard(self.breakDownLevelFourRelicsetEnableCard)
         self.PowerGroup.addSettingCard(self.instanceTeamEnableCard)
+        # self.PowerGroup.addSettingCard(self.instanceTeamNumberCard)
         self.PowerGroup.addSettingCard(self.mergeImmersifierEnableCard)
         self.PowerGroup.addSettingCard(self.useReservedTrailblazePowerEnableCard)
         self.PowerGroup.addSettingCard(self.useFuelEnableCard)
         self.PowerGroup.addSettingCard(self.echoofwarEnableCard)
         self.PowerGroup.addSettingCard(self.echoofwarRunTimeCard)
+        # self.PowerGroup.addSettingCard(self.echoofwarStartDayOfWeekCard)
 
         self.BorrowGroup.addSettingCard(self.borrowEnableCard)
         self.BorrowGroup.addSettingCard(self.borrowCharacterEnableCard)
         self.BorrowGroup.addSettingCard(self.borrowFriendsCard)
         self.BorrowGroup.addSettingCard(self.borrowScrollTimesCard)
+        # self.BorrowGroup.addSettingCard(self.borrowCharacterFromCard)
+        # self.BorrowGroup.addSettingCard(self.borrowCharacterInfoCard)
+        # self.BorrowGroup.addSettingCard(self.borrowCharacterCard)
 
         self.DailyGroup.addSettingCard(self.dispatchEnableCard)
         self.DailyGroup.addSettingCard(self.mailEnableCard)
@@ -718,6 +822,7 @@ class SettingInterface(ScrollArea):
         self.FightGroup.addSettingCard(self.fightOperationModeCard)
         self.FightGroup.addSettingCard(self.fightTimeoutCard)
         self.FightGroup.addSettingCard(self.fightTeamEnableCard)
+        # self.FightGroup.addSettingCard(self.fightTeamNumberCard)
         self.FightGroup.addSettingCard(self.FightRunTimeCard)
         self.FightGroup.addSettingCard(self.fightAllowMapBuyCard)
         self.FightGroup.addSettingCard(self.fightAllowSnackBuyCard)
@@ -739,6 +844,7 @@ class SettingInterface(ScrollArea):
 
         self.ForgottenhallGroup.addSettingCard(self.forgottenhallEnableCard)
         self.ForgottenhallGroup.addSettingCard(self.forgottenhallLevelCard)
+        # self.ForgottenhallGroup.addSettingCard(self.forgottenhallRetriesCard)
         self.ForgottenhallGroup.addSettingCard(self.forgottenhallTeam1Card)
         self.ForgottenhallGroup.addSettingCard(self.forgottenhallTeam2Card)
         self.ForgottenhallGroup.addSettingCard(self.forgottenhallRunTimeCard)
@@ -757,6 +863,7 @@ class SettingInterface(ScrollArea):
 
         self.ProgramGroup.addSettingCard(self.logLevelCard)
         self.ProgramGroup.addSettingCard(self.gamePathCard)
+        # self.ProgramGroup.addSettingCard(self.importConfigCard)
         self.ProgramGroup.addSettingCard(self.checkUpdateCard)
         self.ProgramGroup.addSettingCard(self.pauseAfterSuccess)
         self.ProgramGroup.addSettingCard(self.exitAfterFailure)
@@ -789,15 +896,15 @@ class SettingInterface(ScrollArea):
         self.AboutGroup.addSettingCard(self.updatePrereleaseEnableCard)
         self.AboutGroup.addSettingCard(self.updateFullEnableCard)
 
-        self.addSubInterface(self.PowerGroup, 'PowerInterface', self.tr('개척력'))
-        self.addSubInterface(self.BorrowGroup, 'BorrowInterface', self.tr('지원'))
-        self.addSubInterface(self.DailyGroup, 'DailyInterface', self.tr('일일'))
-        self.addSubInterface(self.ActivityGroup, 'ActivityInterface', self.tr('이벤트'))
-        self.addSubInterface(self.FightGroup, 'FightInterface', self.tr('필드 파밍'))
-        self.addSubInterface(self.UniverseGroup, 'UniverseInterface', self.tr('시뮬레이션'))
-        self.addSubInterface(self.ForgottenhallGroup, 'ForgottenhallInterface', self.tr('혼돈'))
-        self.addSubInterface(self.PureFictionGroup, 'PureFictionInterface', self.tr('허구'))
-        self.addSubInterface(self.ApocalypticGroup, 'ApocalypticInterface', self.tr('종말'))
+        self.addSubInterface(self.PowerGroup, 'PowerInterface', self.tr('体力'))
+        self.addSubInterface(self.BorrowGroup, 'BorrowInterface', self.tr('支援'))
+        self.addSubInterface(self.DailyGroup, 'DailyInterface', self.tr('日常'))
+        self.addSubInterface(self.ActivityGroup, 'ActivityInterface', self.tr('活动'))
+        self.addSubInterface(self.FightGroup, 'FightInterface', self.tr('锄大地'))
+        self.addSubInterface(self.UniverseGroup, 'UniverseInterface', self.tr('宇宙'))
+        self.addSubInterface(self.ForgottenhallGroup, 'ForgottenhallInterface', self.tr('混沌'))
+        self.addSubInterface(self.PureFictionGroup, 'PureFictionInterface', self.tr('虚构'))
+        self.addSubInterface(self.ApocalypticGroup, 'ApocalypticInterface', self.tr('末日'))
 
         self.pivot.addItem(
             routeKey='verticalBar',
@@ -805,23 +912,25 @@ class SettingInterface(ScrollArea):
             onClick=lambda: self.pivot.setCurrentItem(self.stackedWidget.currentWidget().objectName()),
         )
 
-        self.addSubInterface(self.ProgramGroup, 'programInterface', self.tr('프로그램'))
-        self.addSubInterface(self.NotifyGroup, 'NotifyInterface', self.tr('알림'))
-        self.addSubInterface(self.MiscGroup, 'KeybindingInterface', self.tr('기타'))
+        self.addSubInterface(self.ProgramGroup, 'programInterface', self.tr('程序'))
+        self.addSubInterface(self.NotifyGroup, 'NotifyInterface', self.tr('推送'))
+        self.addSubInterface(self.MiscGroup, 'KeybindingInterface', self.tr('杂项'))
         self.addSubInterface(
             accounts_interface(self.tr, self.scrollWidget),
             'AccountsInterface',
-            self.tr('계정')
+            self.tr('账号')
         )
-        self.addSubInterface(self.AboutGroup, 'AboutInterface', self.tr('정보'))
+        self.addSubInterface(self.AboutGroup, 'AboutInterface', self.tr('关于'))
 
         self.stackedWidget.currentChanged.connect(self.onCurrentIndexChanged)
         self.pivot.setCurrentItem(self.stackedWidget.currentWidget().objectName())
         self.stackedWidget.setFixedHeight(self.stackedWidget.currentWidget().sizeHint().height())
 
     def __connectSignalToSlot(self):
+        # self.importConfigCard.clicked.connect(self.__onImportConfigCardClicked)
         self.gamePathCard.clicked.connect(self.__onGamePathCardClicked)
         self.ScriptPathCard.clicked.connect(self.__onScriptPathCardClicked)
+        # self.borrowCharacterInfoCard.clicked.connect(self.__openCharacterFolder())
 
         self.testNotifyCard.clicked.connect(lambda: start_task("notify"))
 
@@ -857,18 +966,35 @@ class SettingInterface(ScrollArea):
         self.verticalScrollBar().setValue(0)
         self.stackedWidget.setFixedHeight(self.stackedWidget.currentWidget().sizeHint().height())
 
+    # def __onImportConfigCardClicked(self):
+    #     configdir, _ = QFileDialog.getOpenFileName(self, "选取配置文件", "./", "Config Files (*.yaml)")
+    #     if (configdir != ""):
+    #         cfg._load_config(configdir)
+    #         cfg.save_config()
+    #         self.__showRestartTooltip()
+
     def __onGamePathCardClicked(self):
-        game_path, _ = QFileDialog.getOpenFileName(self, "게임 경로 선택", "", "All Files (*)")
+        game_path, _ = QFileDialog.getOpenFileName(self, "选择游戏路径", "", "All Files (*)")
         if not game_path or cfg.game_path == game_path:
             return
         cfg.set_value("game_path", game_path)
         self.gamePathCard.setContent(game_path)
 
+    # def __openCharacterFolder(self):
+    #     return lambda: os.startfile(os.path.abspath("./assets/images/share/character"))
+
     def __openUrl(self, url):
         return lambda: QDesktopServices.openUrl(QUrl(url))
 
+    # def __showRestartTooltip(self):
+    #     InfoBar.success(
+    #         self.tr('更新成功'),
+    #         self.tr('配置在重启软件后生效'),
+    #         duration=1500,
+    #         parent=self
+    #     )
     def __onScriptPathCardClicked(self):
-        script_path, _ = QFileDialog.getOpenFileName(self, "스크립트 또는 프로그램 경로", "", "스크립트 또는 실행 파일 (*.ps1 *.bat *.exe)")
+        script_path, _ = QFileDialog.getOpenFileName(self, "脚本或程序路径", "", "脚本或可执行文件 (*.ps1 *.bat *.exe)")
         if not script_path or cfg.script_path == script_path:
             return
         cfg.set_value("script_path", script_path)
