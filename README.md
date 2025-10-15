@@ -49,6 +49,7 @@
   - 시뮬레이션 우주 관련: [프로젝트 문서](https://github.com/Night-stars-1/Auto_Simulated_Universe_Docs/blob/docs/docs/guide/index.md) | [Q\&A](https://github.com/Night-stars-1/Auto_Simulated_Universe_Docs/blob/docs/docs/guide/qa.md)
   - 백그라운드 실행이나 다중 모니터 환경이 필요하다면 [원격 로컬 다중 사용자 데스크톱](https://m7a.top/#/assets/docs/Background)을 시도해 보세요.
   - 오류가 발생하면 [Issue](https://github.com/moesnow/March7thAssistant/issues)에 제보해 주세요. 토론 및 질문은 [Discussions](https://github.com/moesnow/March7thAssistant/discussions)에서 할 수 있습니다. 그룹 채팅은 가끔 확인하며, [PR](https://github.com/moesnow/March7thAssistant/pulls)은 언제나 환영합니다.
+  - python의 최소 버전은 3.11.X 입니다.
 
 ## 다운로드 및 설치
 
