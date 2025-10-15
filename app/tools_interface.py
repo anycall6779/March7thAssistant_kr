@@ -21,39 +21,39 @@ class ToolsInterface(ScrollArea):
         self.scrollWidget = QWidget()
         self.vBoxLayout = QVBoxLayout(self.scrollWidget)
 
-        self.toolsLabel = QLabel(self.tr("工具箱"), self)
+        self.toolsLabel = QLabel(self.tr("툴박스"), self)
 
-        self.ToolsGroup = SettingCardGroup(self.tr('工具箱'), self.scrollWidget)
+        self.ToolsGroup = SettingCardGroup(self.tr('툴박스'), self.scrollWidget)
         self.automaticPlotCard = PushSettingCard(
-            self.tr('运行'),
+            self.tr('실행'),
             FIF.IMAGE_EXPORT,
-            self.tr("自动对话"),
+            self.tr("자동 대화"),
             ''
         )
         self.gameScreenshotCard = PushSettingCard(
-            self.tr('捕获'),
+            self.tr('캡처'),
             FIF.CLIPPING_TOOL,
-            self.tr("游戏截图"),
-            self.tr("检查程序获取的图像是否正确，支持OCR识别文字（可用于复制副本名称）")
+            self.tr("게임 스크린샷"),
+            self.tr("프로그램이 이미지를 올바르게 가져오는지 확인하고, OCR 문자 인식을 지원합니다 (던전 이름 복사에 사용 가능)")
         )
         self.unlockfpsCard = PushSettingCard(
-            self.tr('解锁'),
+            self.tr('해제'),
             FIF.SPEED_HIGH,
-            self.tr("解锁帧率"),
-            self.tr("通过修改注册表解锁120帧率，如已解锁，再次点击将恢复60帧率（未测试国际服）")
+            self.tr("프레임 속도 해제"),
+            self.tr("레지스트리 수정을 통해 120프레임을 해제합니다. 이미 해제된 경우 다시 클릭하면 60프레임으로 복원됩니다 (글로벌 서버는 테스트되지 않음)")
         )
         self.redemptionCodeCard = PushSettingCardCode(
-            self.tr('执行'),
+            self.tr('실행'),
             FIF.BOOK_SHELF,
-            self.tr("兑换码"),
+            self.tr("리딤 코드"),
             "redemption_code",
             self
         )
         self.cloudTouchCard = PushSettingCard(
-            self.tr('启动'),
+            self.tr('시작'),
             FIF.CLOUD,
-            self.tr("触屏模式（暂不可用）"),
-            self.tr("以云游戏移动端 UI 的方式启动游戏，可搭配 Sunshine 和 Moonlight 使用，启动后会将命令复制到剪贴板内")
+            self.tr("터치스크린 모드 (현재 사용 불가)"),
+            self.tr("클라우드 게임 모바일 UI로 게임을 시작하며, Sunshine 및 Moonlight와 함께 사용할 수 있습니다. 시작 후 명령어가 클립보드에 복사됩니다")
         )
         self.cloudTouchCard.setDisabled(True)
 
@@ -100,7 +100,7 @@ class ToolsInterface(ScrollArea):
             if fps == 120:
                 set_game_fps(60)
                 InfoBar.success(
-                    title=self.tr('恢复60成功 (＾∀＾●)'),
+                    title=self.tr('60프레임 복원 성공 (＾∀＾●)'),
                     content="",
                     orient=Qt.Horizontal,
                     isClosable=True,
@@ -111,7 +111,7 @@ class ToolsInterface(ScrollArea):
             else:
                 set_game_fps(120)
                 InfoBar.success(
-                    title=self.tr('解锁120成功 (＾∀＾●)'),
+                    title=self.tr('120프레임 해제 성공 (＾∀＾●)'),
                     content="",
                     orient=Qt.Horizontal,
                     isClosable=True,
@@ -121,8 +121,8 @@ class ToolsInterface(ScrollArea):
                 )
         except:
             InfoBar.warning(
-                title=self.tr('解锁失败'),
-                content="请将游戏图像质量修改为自定义后重试",
+                title=self.tr('해제 실패'),
+                content="게임 그래픽 품질을 '사용자 정의'로 변경한 후 다시 시도하세요",
                 orient=Qt.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.TOP,
@@ -134,8 +134,8 @@ class ToolsInterface(ScrollArea):
         try:
             if not os.path.exists(cfg.game_path):
                 InfoBar.warning(
-                    title=self.tr('游戏路径配置错误(╥╯﹏╰╥)'),
-                    content="请在“设置”-->“程序”中配置",
+                    title=self.tr('게임 경로 설정 오류(╥╯﹏╰╥)'),
+                    content="'설정' --> '프로그램'에서 경로를 설정해주세요",
                     orient=Qt.Horizontal,
                     isClosable=True,
                     position=InfoBarPosition.TOP,
@@ -145,13 +145,13 @@ class ToolsInterface(ScrollArea):
                 return
             graphics_setting = get_graphics_setting()
             if graphics_setting is None:
-                raise Exception("请将游戏图像质量修改为自定义后重试")
+                raise Exception("게임 그래픽 품질을 '사용자 정의'로 변경한 후 다시 시도하세요")
             args = ["-is_cloud", "1", "-platform_type", "CLOUD_WEB_TOUCH", "-graphics_setting", base64.b64encode(graphics_setting).decode("utf-8")]
             subprocess.Popen([cfg.game_path] + args)
             pyperclip.copy(f'"{cfg.game_path}" {" ".join(args)}')
             InfoBar.success(
-                title=self.tr('启动成功(＾∀＾●)'),
-                content="已将命令复制到剪贴板",
+                title=self.tr('시작 성공(＾∀＾●)'),
+                content="명령어가 클립보드에 복사되었습니다",
                 orient=Qt.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.TOP,
@@ -160,7 +160,7 @@ class ToolsInterface(ScrollArea):
             )
         except Exception as e:
             InfoBar.warning(
-                title=self.tr('启动失败'),
+                title=self.tr('시작 실패'),
                 content=str(e),
                 orient=Qt.Horizontal,
                 isClosable=True,

@@ -10,7 +10,7 @@ with redirect_stdout(None):
 
 from .home_interface import HomeInterface
 from .help_interface import HelpInterface
-# from .changelog_interface import ChangelogInterface
+# from .changelog_interface import ChangelogInterface # 변경 로그 인터페이스
 from .warp_interface import WarpInterface
 from .tools_interface import ToolsInterface
 from .setting_interface import SettingInterface
@@ -34,7 +34,7 @@ class MainWindow(MSFluentWindow):
         self.initInterface()
         self.initNavigation()
 
-        # 检查更新
+        # 업데이트 확인
         checkUpdate(self, flag=True)
         checkAnnouncement(self)
 
@@ -43,7 +43,7 @@ class MainWindow(MSFluentWindow):
         setThemeColor('#f18cb9', lazy=True)
         setTheme(Theme.AUTO, lazy=True)
 
-        # 禁用最大化
+        # 최대화 비활성화
         self.titleBar.maxBtn.setHidden(True)
         self.titleBar.maxBtn.setDisabled(True)
         self.titleBar.setDoubleClickEnabled(False)
@@ -55,7 +55,7 @@ class MainWindow(MSFluentWindow):
         self.setWindowIcon(QIcon('./assets/logo/March7th.ico'))
         self.setWindowTitle("March7th Assistant")
 
-        # 创建启动画面
+        # 스플래시 화면 생성
         self.splashScreen = SplashScreen(self.windowIcon(), self)
         self.splashScreen.setIconSize(QSize(128, 128))
         self.splashScreen.titleBar.maxBtn.setHidden(True)
@@ -77,37 +77,37 @@ class MainWindow(MSFluentWindow):
         self.settingInterface = SettingInterface(self)
 
     def initNavigation(self):
-        self.addSubInterface(self.homeInterface, FIF.HOME, self.tr('主页'))
-        self.addSubInterface(self.helpInterface, FIF.BOOK_SHELF, self.tr('帮助'))
-        # self.addSubInterface(self.changelogInterface, FIF.UPDATE, self.tr('更新日志'))
-        self.addSubInterface(self.warpInterface, FIF.SHARE, self.tr('抽卡记录'))
-        self.addSubInterface(self.toolsInterface, FIF.DEVELOPER_TOOLS, self.tr('工具箱'))
+        self.addSubInterface(self.homeInterface, FIF.HOME, self.tr('홈'))
+        self.addSubInterface(self.helpInterface, FIF.BOOK_SHELF, self.tr('도움말'))
+        # self.addSubInterface(self.changelogInterface, FIF.UPDATE, self.tr('변경 로그'))
+        self.addSubInterface(self.warpInterface, FIF.SHARE, self.tr('워프 기록'))
+        self.addSubInterface(self.toolsInterface, FIF.DEVELOPER_TOOLS, self.tr('툴박스'))
 
         self.navigationInterface.addWidget(
             'startGameButton',
-            NavigationBarPushButton(FIF.PLAY, '启动游戏', isSelectable=False),
+            NavigationBarPushButton(FIF.PLAY, '게임 시작', isSelectable=False),
             self.startGame,
             NavigationItemPosition.BOTTOM)
 
         self.navigationInterface.addWidget(
             'themeButton',
-            NavigationBarPushButton(FIF.BRUSH, '主题', isSelectable=False),
+            NavigationBarPushButton(FIF.BRUSH, '테마', isSelectable=False),
             lambda: toggleTheme(lazy=True),
             NavigationItemPosition.BOTTOM)
 
         self.navigationInterface.addWidget(
             'avatar',
-            NavigationBarPushButton(FIF.HEART, '赞赏', isSelectable=False),
+            NavigationBarPushButton(FIF.HEART, '후원', isSelectable=False),
             lambda: MessageBoxSupport(
-                '支持作者🥰',
-                '此程序为免费开源项目，如果你付了钱请立刻退款\n如果喜欢本项目，可以微信赞赏送作者一杯咖啡☕\n您的支持就是作者开发和维护项目的动力🚀',
+                '개발자 후원하기🥰',
+                '이 프로그램은 무료 오픈 소스 프로젝트입니다. 만약 돈을 지불했다면 즉시 환불받으세요.\n이 프로젝트가 마음에 드신다면, 위챗페이로 개발자에게 커피 한 잔을 선물해주세요☕\n여러분의 지원은 개발자가 프로젝트를 개발하고 유지하는 원동력입니다🚀',
                 './assets/app/images/sponsor.jpg',
                 self
             ).exec(),
             NavigationItemPosition.BOTTOM
         )
 
-        self.addSubInterface(self.settingInterface, FIF.SETTING, self.tr('设置'), position=NavigationItemPosition.BOTTOM)
+        self.addSubInterface(self.settingInterface, FIF.SETTING, self.tr('설정'), position=NavigationItemPosition.BOTTOM)
 
         self.splashScreen.finish()
         self.themeListener = checkThemeChange(self)
@@ -115,7 +115,7 @@ class MainWindow(MSFluentWindow):
         if not cfg.get_value(base64.b64decode("YXV0b191cGRhdGU=").decode("utf-8")):
             disclaimer(self)
 
-    # main_window.py 只需修改关闭事件
+    # main_window.py에서는 종료 이벤트만 수정하면 됩니다.
     def closeEvent(self, e):
         if self.themeListener and self.themeListener.isRunning():
             self.themeListener.terminate()
@@ -127,7 +127,7 @@ class MainWindow(MSFluentWindow):
         try:
             if game.start_game():
                 InfoBar.success(
-                    title=self.tr('启动成功(＾∀＾●)'),
+                    title=self.tr('실행 성공(＾∀＾●)'),
                     content="",
                     orient=Qt.Horizontal,
                     isClosable=True,
@@ -137,8 +137,8 @@ class MainWindow(MSFluentWindow):
                 )
             else:
                 InfoBar.warning(
-                    title=self.tr('游戏路径配置错误(╥╯﹏╰╥)'),
-                    content="请在“设置”-->“程序”中配置",
+                    title=self.tr('게임 경로 설정 오류(╥╯﹏╰╥)'),
+                    content="'설정' --> '프로그램'에서 경로를 설정해주세요",
                     orient=Qt.Horizontal,
                     isClosable=True,
                     position=InfoBarPosition.TOP,
@@ -147,7 +147,7 @@ class MainWindow(MSFluentWindow):
                 )
         except Exception as e:
             InfoBar.warning(
-                title=self.tr('启动失败'),
+                title=self.tr('실행 실패'),
                 content=str(e),
                 orient=Qt.Horizontal,
                 isClosable=True,

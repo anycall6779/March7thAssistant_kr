@@ -18,7 +18,7 @@ class MessageBoxImage(MessageBox):
             elif isinstance(image, str):
                 self.imageLabel.setPixmap(QPixmap(image))
             else:
-                raise ValueError("Unsupported image type.")
+                raise ValueError("지원되지 않는 이미지 유형입니다.")
             self.imageLabel.setScaledContents(True)
 
             imageIndex = self.vBoxLayout.indexOf(self.textLayout) + 1
@@ -29,7 +29,7 @@ class MessageBoxSupport(MessageBoxImage):
     def __init__(self, title: str, content: str, image: str, parent=None):
         super().__init__(title, content, image, parent)
 
-        self.yesButton.setText('下次一定')
+        self.yesButton.setText('다음에 할게요')
         self.cancelButton.setHidden(True)
 
 
@@ -37,7 +37,7 @@ class MessageBoxAnnouncement(MessageBoxImage):
     def __init__(self, title: str, content: str, image: Optional[str | QPixmap], parent=None):
         super().__init__(title, content, image, parent)
 
-        self.yesButton.setText('收到')
+        self.yesButton.setText('확인')
         self.cancelButton.setHidden(True)
         self.setContentCopyable(True)
 
@@ -70,16 +70,16 @@ class MessageBoxUpdate(MessageBoxHtml):
     def __init__(self, title: str, content: str, parent=None):
         super().__init__(title, content, parent)
 
-        self.yesButton.setText('下载')
-        self.cancelButton.setText('好的')
+        self.yesButton.setText('다운로드')
+        self.cancelButton.setText('확인')
 
 
 class MessageBoxDisclaimer(MessageBoxHtml):
     def __init__(self, title: str, content: str, parent=None):
         super().__init__(title, content, parent)
 
-        self.yesButton.setText('退出')
-        self.cancelButton.setText('我已知晓')
+        self.yesButton.setText('나가기')
+        self.cancelButton.setText('내용을 확인했습니다')
         self.setContentCopyable(True)
 
 
@@ -90,8 +90,8 @@ class MessageBoxEdit(MessageBox):
         self.textLayout.removeWidget(self.contentLabel)
         self.contentLabel.clear()
 
-        self.yesButton.setText('确认')
-        self.cancelButton.setText('取消')
+        self.yesButton.setText('확인')
+        self.cancelButton.setText('취소')
 
         self.lineEdit = LineEdit(self)
         self.lineEdit.setText(self.content)
@@ -110,8 +110,8 @@ class MessageBoxEditMultiple(MessageBox):
         self.textLayout.removeWidget(self.contentLabel)
         self.contentLabel.clear()
 
-        self.yesButton.setText('确认')
-        self.cancelButton.setText('取消')
+        self.yesButton.setText('확인')
+        self.cancelButton.setText('취소')
 
         self.textEdit = TextEdit(self)
         self.textEdit.setFixedHeight(250)
@@ -131,8 +131,8 @@ class MessageBoxDate(MessageBox):
         self.textLayout.removeWidget(self.contentLabel)
         self.contentLabel.clear()
 
-        self.yesButton.setText('确认')
-        self.cancelButton.setText('取消')
+        self.yesButton.setText('확인')
+        self.cancelButton.setText('취소')
 
         self.datePicker = DateTimeEdit(self)
         self.datePicker.setDateTime(content)
@@ -153,8 +153,8 @@ class MessageBoxInstance(MessageBox):
         self.textLayout.removeWidget(self.contentLabel)
         self.contentLabel.clear()
 
-        self.yesButton.setText('确认')
-        self.cancelButton.setText('取消')
+        self.yesButton.setText('확인')
+        self.cancelButton.setText('취소')
 
         self.buttonGroup.setMinimumWidth(480)
 
@@ -175,7 +175,7 @@ class MessageBoxInstance(MessageBox):
 
             has_default = False
             for name, info in names.items():
-                item_name = f"{name}（{info}）"
+                item_name = f"{name} ({info})"
                 comboBox.addItem(item_name)
                 if self.content[type] == name:
                     comboBox.setCurrentText(item_name)
@@ -186,7 +186,7 @@ class MessageBoxInstance(MessageBox):
             self.textLayout.addWidget(comboBox, 0, Qt.AlignTop)
             self.comboBox_dict[type] = comboBox
 
-        self.titleLabelInfo = QLabel("说明：未更新副本支持手动输入名称，清体力是根据选择的副本类型来判断的,\n此处设置的副本名称也会用于完成活动或每日实训对应的任务,\n如果即使有对应的任务,你也不希望完成,可以将对应的副本名称改为“无”", parent)
+        self.titleLabelInfo = QLabel("설명: 업데이트되지 않은 던전은 수동으로 이름을 입력할 수 있습니다. 개척력 소모는 선택한 던전 유형에 따라 결정됩니다.\n여기서 설정한 던전 이름은 이벤트나 일일 훈련의 해당 임무를 완료하는 데에도 사용됩니다.\n만약 해당 임무가 있더라도 완료하고 싶지 않다면, 해당 던전 이름을 '없음'으로 변경할 수 있습니다.", parent)
         self.textLayout.addWidget(self.titleLabelInfo, 0, Qt.AlignTop)
 
 
@@ -198,8 +198,8 @@ class MessageBoxNotify(MessageBox):
         self.textLayout.removeWidget(self.contentLabel)
         self.contentLabel.clear()
 
-        self.yesButton.setText('确认')
-        self.cancelButton.setText('取消')
+        self.yesButton.setText('확인')
+        self.cancelButton.setText('취소')
 
         self.buttonGroup.setMinimumWidth(480)
 
@@ -229,8 +229,8 @@ class MessageBoxNotifyTemplate(MessageBox):
         self.textLayout.removeWidget(self.contentLabel)
         self.contentLabel.clear()
 
-        self.yesButton.setText('确认')
-        self.cancelButton.setText('取消')
+        self.yesButton.setText('확인')
+        self.cancelButton.setText('취소')
 
         self.buttonGroup.setMinimumWidth(480)
 
@@ -251,7 +251,7 @@ class MessageBoxNotifyTemplate(MessageBox):
 
             self.lineEdit_dict[id] = lineEdit
 
-        self.titleLabelInfo = QLabel("说明：{ } 中的内容会在实际发送时被替换，\\n 代表换行", parent)
+        self.titleLabelInfo = QLabel("설명: { } 안의 내용은 실제 전송 시 대체되며, \\n은 줄 바꿈을 의미합니다.", parent)
         self.textLayout.addWidget(self.titleLabelInfo, 0, Qt.AlignTop)
 
 
@@ -263,8 +263,8 @@ class MessageBoxTeam(MessageBox):
         self.textLayout.removeWidget(self.contentLabel)
         self.contentLabel.clear()
 
-        self.yesButton.setText('确认')
-        self.cancelButton.setText('取消')
+        self.yesButton.setText('확인')
+        self.cancelButton.setText('취소')
 
         self.buttonGroup.setMinimumWidth(400)
 
@@ -274,15 +274,15 @@ class MessageBoxTeam(MessageBox):
         self.template = template
 
         self.tech_map = {
-            -1: "秘技 / 开怪",
-            0: "无操作",
-            1: "秘技 1 次",
-            2: "秘技 2 次",
+            -1: "비술 / 전투 시작",
+            0: "동작 없음",
+            1: "비술 1회",
+            2: "비술 2회",
         }
 
         self.comboBox_list = []
         for i in range(1, 5):
-            titleLabel = QLabel(f"{i}号位", parent)
+            titleLabel = QLabel(f"{i}번 캐릭터", parent)
             titleLabel.setFont(font)
             self.textLayout.addWidget(titleLabel, 0, Qt.AlignTop)
 
@@ -303,7 +303,7 @@ class MessageBoxTeam(MessageBox):
 
             self.comboBox_list.append((charComboBox, techComboBox))
 
-        self.titleLabelInfo = QLabel("说明：每个队伍中只允许一名角色配置为“秘技 / 开怪”，\n数字代表秘技使用次数，其中-1代表最后一个放秘技并开怪的角色", parent)
+        self.titleLabelInfo = QLabel("설명: 각 파티에서는 한 명의 캐릭터만 '비술 / 전투 시작'으로 설정할 수 있습니다.\n숫자는 비술 사용 횟수를 의미하며, -1은 마지막으로 비술을 사용하고 전투를 시작하는 캐릭터를 의미합니다.", parent)
         self.textLayout.addWidget(self.titleLabelInfo, 0, Qt.AlignTop)
 
 
@@ -315,8 +315,8 @@ class MessageBoxFriends(MessageBox):
         self.textLayout.removeWidget(self.contentLabel)
         self.contentLabel.clear()
 
-        self.yesButton.setText('确认')
-        self.cancelButton.setText('取消')
+        self.yesButton.setText('확인')
+        self.cancelButton.setText('취소')
 
         self.buttonGroup.setMinimumWidth(400)
 
@@ -344,5 +344,5 @@ class MessageBoxFriends(MessageBox):
 
             self.comboBox_list.append((charComboBox, nameLineEdit))
 
-        self.titleLabelInfo = QLabel("说明：左侧选择角色后，在右侧对应的文本框中填写好友名称。\n例如好友名称为“持明上網”，填写“持明上”也可以匹配成功，\n若好友名称留空则只查找选择的角色。", parent)
+        self.titleLabelInfo = QLabel("설명: 왼쪽에서 캐릭터를 선택한 후, 오른쪽 해당 텍스트 상자에 친구 이름을 입력하세요.\n예를 들어 친구 이름이 '홍길동전'일 경우, '홍길동'만 입력해도 매칭에 성공할 수 있습니다.\n친구 이름 칸을 비워두면 선택한 캐릭터만 검색합니다.", parent)
         self.textLayout.addWidget(self.titleLabelInfo, 0, Qt.AlignTop)
