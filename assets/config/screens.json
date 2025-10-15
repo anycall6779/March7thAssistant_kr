@@ -1,6 +1,6 @@
 [
     {
-        "name": "主界面",
+        "name": "메인 화면",
         "id": "main",
         "image_path": "./assets/images/screen/main.png",
         "actions": [
@@ -29,7 +29,7 @@
         ]
     },
     {
-        "name": "手机菜单",
+        "name": "메뉴",
         "id": "menu",
         "image_path": "./assets/images/share/menu/more.png",
         "actions": [
@@ -87,7 +87,7 @@
                 "actions_list": [
                     "auto.click_element('./assets/images/share/menu/more.png', 'image', 0.9)",
                     "time.sleep(2)",
-                    "auto.click_element('漫游签证', 'text', None, 2, crop=(1261.0 / 1920, 1.0 / 1080, 552.0 / 1920, 346.0 / 1080))"
+                    "auto.click_element('개척 프로필', 'text', None, 2, crop=(1261.0 / 1920, 1.0 / 1080, 552.0 / 1920, 346.0 / 1080))"
                 ]
             },
             {
@@ -95,7 +95,7 @@
                 "actions_list": [
                     "auto.click_element('./assets/images/share/menu/more.png', 'image', 0.9)",
                     "time.sleep(2)",
-                    "auto.click_element('兑换码', 'text', None, 2, crop=(1261.0 / 1920, 1.0 / 1080, 552.0 / 1920, 346.0 / 1080))"
+                    "auto.click_element('리딤 코드', 'text', None, 2, crop=(1261.0 / 1920, 1.0 / 1080, 552.0 / 1920, 346.0 / 1080))"
                 ]
             },
             {
@@ -154,7 +154,7 @@
         ]
     },
     {
-        "name": "地图",
+        "name": "지도",
         "id": "map",
         "image_path": "./assets/images/screen/map.png",
         "actions": [
@@ -167,7 +167,7 @@
         ]
     },
     {
-        "name": "3D地图",
+        "name": "3D 지도",
         "id": "map3d",
         "image_path": "./assets/images/screen/map3d.png",
         "actions": [
@@ -180,7 +180,7 @@
         ]
     },
     {
-        "name": "月卡",
+        "name": "월정액 보급 허가증",
         "id": "monthly_card",
         "image_path": "./assets/images/screen/monthly_card.png",
         "actions": [
@@ -195,7 +195,7 @@
         ]
     },
     {
-        "name": "启动游戏",
+        "name": "게임 시작",
         "id": "start_game",
         "image_path": "./assets/images/screen/start_game.png",
         "actions": [
@@ -209,7 +209,7 @@
         ]
     },
     {
-        "name": "点击进入",
+        "name": "클릭하여 시작",
         "id": "click_enter",
         "image_path": "./assets/images/screen/click_enter.png",
         "actions": [
@@ -223,7 +223,7 @@
         ]
     },
     {
-        "name": "退出「模拟宇宙」",
+        "name": "「시뮬레이션 우주」 종료",
         "id": "leave_temporarily",
         "image_path": "./assets/images/screen/universe/leave_temporarily.png",
         "actions": [
@@ -237,7 +237,7 @@
         ]
     },
     {
-        "name": "模拟宇宙-分析报告",
+        "name": "시뮬레이션 우주-분석 보고서",
         "id": "universe_report",
         "image_path": "./assets/images/screen/universe/universe_report.png",
         "actions": [
@@ -250,7 +250,7 @@
         ]
     },
     {
-        "name": "模拟宇宙-地图",
+        "name": "시뮬레이션 우주-지도",
         "id": "universe_map",
         "image_path": "./assets/images/screen/universe/universe_map.png",
         "actions": [
@@ -265,7 +265,7 @@
         ]
     },
     {
-        "name": "撤退",
+        "name": "후퇴",
         "id": "retreat",
         "image_path": "./assets/images/zh_CN/fight/retreat.png",
         "actions": [
@@ -279,7 +279,7 @@
         ]
     },
     {
-        "name": "退出关卡",
+        "name": "스테이지 나가기",
         "id": "fight_exit",
         "image_path": "./assets/images/zh_CN/fight/fight_exit.png",
         "actions": [
@@ -293,7 +293,7 @@
         ]
     },
     {
-        "name": "星际和平指南-每日实训",
+        "name": "성간 평화 가이드-일일 훈련",
         "id": "guide2",
         "image_path": "./assets/images/screen/guide/guide2.png",
         "actions": [
@@ -324,7 +324,7 @@
         ]
     },
     {
-        "name": "星际和平指南-生存索引",
+        "name": "성간 평화 가이드-생존 인덱스",
         "id": "guide3",
         "image_path": "./assets/images/screen/guide/guide3.png",
         "actions": [
@@ -355,7 +355,7 @@
         ]
     },
     {
-        "name": "星际和平指南-逐光捡金",
+        "name": "성간 평화 가이드-전략 훈련",
         "id": "guide4",
         "image_path": "./assets/images/screen/guide/guide4.png",
         "actions": [
@@ -386,31 +386,31 @@
             {
                 "target_screen": "memory_of_chaos",
                 "actions_list": [
-                    "auto.click_element('忘却之庭', 'text', None, 10, crop=(231.0 / 1920, 420.0 / 1080, 450.0 / 1920, 536.0 / 1080))",
+                    "auto.click_element('망각의 정원', 'text', None, 10, crop=(231.0 / 1920, 420.0 / 1080, 450.0 / 1920, 536.0 / 1080))",
                     "time.sleep(1)",
-                    "auto.click_element('传送', 'text', None, 10, crop=(689.0 / 1920, 285.0 / 1080, 970.0 / 1920, 474.0 / 1080))"
+                    "auto.click_element('전송', 'text', None, 10, crop=(689.0 / 1920, 285.0 / 1080, 970.0 / 1920, 474.0 / 1080))"
                 ]
             },
             {
                 "target_screen": "purefiction",
                 "actions_list": [
-                    "auto.click_element('虚构叙事', 'text', None, 10, crop=(231.0 / 1920, 420.0 / 1080, 450.0 / 1920, 536.0 / 1080))",
+                    "auto.click_element('허구 이야기', 'text', None, 10, crop=(231.0 / 1920, 420.0 / 1080, 450.0 / 1920, 536.0 / 1080))",
                     "time.sleep(1)",
-                    "auto.click_element('传送', 'text', None, 10, crop=(689.0 / 1920, 285.0 / 1080, 970.0 / 1920, 474.0 / 1080))"
+                    "auto.click_element('전송', 'text', None, 10, crop=(689.0 / 1920, 285.0 / 1080, 970.0 / 1920, 474.0 / 1080))"
                 ]
             },
             {
                 "target_screen": "apocalyptic",
                 "actions_list": [
-                    "auto.click_element('日幻影', 'text', max_retries=10, crop=(274.0 / 1920, 419.0 / 1080, (670.0) / 1920, (419.0+322.0) / 1080), include=True)",
+                    "auto.click_element('종말의 환영', 'text', max_retries=10, crop=(274.0 / 1920, 419.0 / 1080, (670.0) / 1920, (419.0+322.0) / 1080), include=True)",
                     "time.sleep(1)",
-                    "auto.click_element('传送', 'text', None, 10, crop=(689.0 / 1920, 285.0 / 1080, 970.0 / 1920, 474.0 / 1080))"
+                    "auto.click_element('전송', 'text', None, 10, crop=(689.0 / 1920, 285.0 / 1080, 970.0 / 1920, 474.0 / 1080))"
                 ]
             }
         ]
     },
     {
-        "name": "星际和平指南-模拟宇宙",
+        "name": "성간 평화 가이드-시뮬레이션 우주",
         "id": "guide5",
         "image_path": "./assets/images/screen/guide/guide5.png",
         "actions": [
@@ -441,26 +441,26 @@
             {
                 "target_screen": "universe_main",
                 "actions_list": [
-                    "auto.click_element('模拟宇宙', 'text', None, 10, crop=(238.0 / 1920, 257.0 / 1080, 449.0 / 1920, 525.0 / 1080))",
+                    "auto.click_element('시뮬레이션 우주', 'text', None, 10, crop=(238.0 / 1920, 257.0 / 1080, 449.0 / 1920, 525.0 / 1080))",
                     "time.sleep(1)",
-                    "auto.click_element('传送', 'text', None, 10, crop=(684.0 / 1920, 278.0 / 1080, 981.0 / 1920, 656.0 / 1080), action=\"move\")",
+                    "auto.click_element('전송', 'text', None, 10, crop=(684.0 / 1920, 278.0 / 1080, 981.0 / 1920, 656.0 / 1080), action=\"move\")",
                     "auto.mouse_scroll(50, -1, False)",
                     "time.sleep(1)",
-                    "auto.click_element('传送', 'min_distance_text', crop=(684.0 / 1920, 278.0 / 1080, 981.0 / 1920, 656.0 / 1080), include=True, source=\"模拟宇宙\", source_type=\"text\")"
+                    "auto.click_element('전송', 'min_distance_text', crop=(684.0 / 1920, 278.0 / 1080, 981.0 / 1920, 656.0 / 1080), include=True, source=\"시뮬레이션 우주\", source_type=\"text\")"
                 ]
             },
             {
                 "target_screen": "divergent_main",
                 "actions_list": [
-                    "auto.click_element('差分宇宙', 'text', None, 10, crop=(238.0 / 1920, 257.0 / 1080, 449.0 / 1920, 525.0 / 1080))",
+                    "auto.click_element('차분 우주', 'text', None, 10, crop=(238.0 / 1920, 257.0 / 1080, 449.0 / 1920, 525.0 / 1080))",
                     "time.sleep(1)",
-                    "auto.click_element('前往参与', 'text', None, 10, crop=(684.0 / 1920, 278.0 / 1080, 981.0 / 1920, 656.0 / 1080))"
+                    "auto.click_element('참여하기', 'text', None, 10, crop=(684.0 / 1920, 278.0 / 1080, 981.0 / 1920, 656.0 / 1080))"
                 ]
             }
         ]
     },
     {
-        "name": "邮箱",
+        "name": "우편",
         "id": "mail",
         "image_path": "./assets/images/screen/mail.png",
         "actions": [
@@ -473,7 +473,7 @@
         ]
     },
     {
-        "name": "漫游签证",
+        "name": "개척 프로필",
         "id": "visa",
         "image_path": "./assets/images/screen/visa.png",
         "actions": [
@@ -486,7 +486,7 @@
         ]
     },
     {
-        "name": "兑换码",
+        "name": "리딤 코드",
         "id": "redemption",
         "image_path": "./assets/images/screen/redemption.png",
         "actions": [
@@ -499,7 +499,7 @@
         ]
     },
     {
-        "name": "相机",
+        "name": "사진 촬영",
         "id": "camera",
         "image_path": "./assets/images/screen/camera.png",
         "actions": [
@@ -512,7 +512,7 @@
         ]
     },
     {
-        "name": "照片预览",
+        "name": "사진 미리보기",
         "id": "photo_preview",
         "image_path": "./assets/images/screen/photo_preview.png",
         "actions": [
@@ -525,7 +525,7 @@
         ]
     },
     {
-        "name": "模拟宇宙-主界面",
+        "name": "시뮬레이션 우주-메인 화면",
         "id": "universe_main",
         "image_path": "./assets/images/screen/universe/universe_main.png",
         "actions": [
@@ -544,7 +544,7 @@
         ]
     },
     {
-        "name": "模拟宇宙-扩展装置",
+        "name": "시뮬레이션 우주-확장 장치",
         "id": "universe_expansion",
         "image_path": "./assets/images/screen/universe/universe_expansion.png",
         "actions": [
@@ -563,7 +563,7 @@
         ]
     },
     {
-        "name": "差分宇宙-主界面",
+        "name": "차분 우주-메인 화면",
         "id": "divergent_main",
         "image_path": "./assets/images/screen/universe/divergent_main.png",
         "actions": [
@@ -576,7 +576,7 @@
         ]
     },
     {
-        "name": "委托",
+        "name": "의뢰",
         "id": "dispatch",
         "image_path": "./assets/images/screen/dispatch.png",
         "actions": [
@@ -589,7 +589,7 @@
         ]
     },
     {
-        "name": "开启无名勋礼",
+        "name": "무명객의 예장 개방",
         "id": "start_srpass",
         "image_path": "./assets/images/screen/start_srpass.png",
         "actions": [
@@ -602,7 +602,7 @@
         ]
     },
     {
-        "name": "无名勋礼-奖励",
+        "name": "무명객의 예장-보상",
         "id": "pass1",
         "image_path": "./assets/images/screen/pass/pass1.png",
         "actions": [
@@ -621,7 +621,7 @@
         ]
     },
     {
-        "name": "无名勋礼-任务",
+        "name": "무명객의 예장-임무",
         "id": "pass2",
         "image_path": "./assets/images/screen/pass/pass2.png",
         "actions": [
@@ -640,7 +640,7 @@
         ]
     },
     {
-        "name": "合成-消耗品合成",
+        "name": "합성-소모품 합성",
         "id": "consumables",
         "image_path": "./assets/images/screen/synthesis/consumables.png",
         "actions": [
@@ -659,7 +659,7 @@
         ]
     },
     {
-        "name": "合成-材料合成",
+        "name": "합성-재료 합성",
         "id": "material",
         "image_path": "./assets/images/screen/synthesis/material.png",
         "actions": [
@@ -678,7 +678,7 @@
         ]
     },
     {
-        "name": "背包-消耗品",
+        "name": "가방-소모품",
         "id": "bag_consumables",
         "image_path": "./assets/images/screen/bag/bag_consumables.png",
         "actions": [
@@ -691,7 +691,7 @@
         ]
     },
     {
-        "name": "背包-遗器",
+        "name": "가방-유물",
         "id": "bag_relicset",
         "image_path": "./assets/images/screen/bag/bag_relicset.png",
         "actions": [
@@ -704,7 +704,7 @@
         ]
     },
     {
-        "name": "忘却之庭-混沌回忆",
+        "name": "망각의 정원-혼돈의 기억",
         "id": "memory_of_chaos",
         "image_path": "./assets/images/screen/forgottenhall/memory_of_chaos.png",
         "actions": [
@@ -724,7 +724,7 @@
         ]
     },
     {
-        "name": "忘却之庭-回忆",
+        "name": "망각의 정원-기억",
         "id": "memory",
         "image_path": "./assets/images/screen/forgottenhall/memory.png",
         "actions": [
@@ -737,7 +737,7 @@
         ]
     },
     {
-        "name": "忘却之庭-准备战斗",
+        "name": "망각의 정원-전투 준비",
         "id": "prepare_fight",
         "image_path": "./assets/images/forgottenhall/prepare_fight.png",
         "actions": [
@@ -752,7 +752,7 @@
         ]
     },
     {
-        "name": "虚构叙事",
+        "name": "허구 이야기",
         "id": "purefiction",
         "image_path": "./assets/images/screen/purefiction/purefiction.png",
         "actions": [
@@ -765,7 +765,7 @@
         ]
     },
     {
-        "name": "末日幻影",
+        "name": "종말의 환영",
         "id": "apocalyptic",
         "image_path": "./assets/images/screen/apocalyptic/apocalyptic.png",
         "actions": [
@@ -778,7 +778,7 @@
         ]
     },
     {
-        "name": "队伍",
+        "name": "파티",
         "id": "configure_team",
         "image_path": "./assets/images/screen/configure_team.png",
         "actions": [
@@ -791,7 +791,7 @@
         ]
     },
     {
-        "name": "活动",
+        "name": "이벤트",
         "id": "activity",
         "image_path": "./assets/images/screen/activity.png",
         "actions": [
@@ -804,7 +804,7 @@
         ]
     },
     {
-        "name": "角色活动跃迁",
+        "name": "캐릭터 이벤트 워프",
         "id": "character_warp",
         "image_path": "./assets/images/screen/warp/character_warp.png",
         "actions": [
@@ -817,7 +817,7 @@
         ]
     },
     {
-        "name": "常驻跃迁",
+        "name": "상시 워프",
         "id": "stellar_warp",
         "image_path": "./assets/images/screen/warp/stellar_warp.png",
         "actions": [
@@ -837,7 +837,7 @@
         ]
     },
     {
-        "name": "姬子试用",
+        "name": "히메코 체험",
         "id": "himeko_try",
         "image_path": "./assets/images/screen/warp/himeko_try.png",
         "actions": [
@@ -857,7 +857,7 @@
         ]
     },
     {
-        "name": "姬子试用-弹窗",
+        "name": "히메코 체험-팝업",
         "id": "himeko_try_banner",
         "image_path": "./assets/images/screen/warp/himeko_try_banner.png",
         "actions": [
@@ -870,7 +870,7 @@
         ]
     },
     {
-        "name": "姬子试用-准备战斗",
+        "name": "히메코 체험-전투 준비",
         "id": "himeko_prepare",
         "image_path": "./assets/images/screen/warp/himeko_prepare.png",
         "actions": [
