@@ -1,15 +1,14 @@
 # 更新日志
 
 ## v2025.10.15
-
-- 支持 3.6 版本新增角色
-- 优化自动登录过程并适配国际服 [#706](https://github.com/moesnow/March7thAssistant/pull/706)
-- 支持队伍中有角色死亡时继续挑战副本 [#705](https://github.com/moesnow/March7thAssistant/pull/705)
-- 延迟部分超时时间优化机械硬盘使用体验 [#701](https://github.com/moesnow/March7thAssistant/pull/701)
-- 新增选项 “成功后暂停程序” 和 “失败后直接退出” [#704](https://github.com/moesnow/March7thAssistant/pull/704) [#709](https://github.com/moesnow/March7thAssistant/pull/709)
-- 修复部分用户可能会出现的下载异常
-- 优化下载程序支持自动使用系统代理
-- 优化重置配置文件功能的错误提示信息
+* 3.6 버전에 추가된 신규 캐릭터 지원
+* 자동 로그인 과정 최적화 및 글로벌 서버 지원 [#706](https://github.com/moesnow/March7thAssistant/pull/706)
+* 파티에 사망한 캐릭터가 있어도 계속해서 던전에 도전할 수 있도록 지원 [#705](https://github.com/moesnow/March7thAssistant/pull/705)
+* 일부 타임아웃 시간을 늘려 기계식 하드 드라이브(HDD) 사용 경험 최적화 [#701](https://github.com/moesnow/March7thAssistant/pull/701)
+* "성공 후 프로그램 일시정지" 및 "실패 시 즉시 종료" 옵션 추가 [#704](https://github.com/moesnow/March7thAssistant/pull/704) [#709](https://github.com/moesnow/March7thAssistant/pull/709)
+* 일부 사용자에게 발생할 수 있는 다운로드 이상 현상 수정
+* 다운로드 프로그램이 시스템 프록시를 자동으로 사용하도록 최적화
+* 설정 파일 초기화 기능의 오류 메시지 정보 최적화
 
 ## v2025.9.25
 
