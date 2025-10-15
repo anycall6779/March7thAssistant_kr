@@ -2,7 +2,7 @@
   <h1 align="center">
     <img src="./assets/screenshot/March7th.png" width="200">
     <br/>
-    March7thAssistant · 三月七小助手
+    삼칠이어시스트 (March7th Assistant)
   </h1>
   <a href="https://trendshift.io/repositories/3892" target="_blank"><img src="https://trendshift.io/api/badge/repositories/3892" alt="moesnow%2FMarch7thAssistant | Trendshift" style="width: 200px; height: 46px;" width="250" height="46"/></a>
 </div>
@@ -19,102 +19,97 @@
 
 <div align="center">
 
-**简体中文** | [繁體中文](./README_TW.md) | [English](./README_EN.md)
+ **한국어** | [繁體中文](./README_TW.md) | [English](./README_EN.md)
 
-快速上手，请访问：[使用教程](https://m7a.top/#/assets/docs/Tutorial)
+빠른 시작 가이드: [사용 튜토리얼](https://m7a.top/#/assets/docs/Tutorial)
 
-遇到问题，请在提问前查看：[FAQ](https://m7a.top/#/assets/docs/FAQ)
+문제가 발생하면 질문하기 전에 확인하세요: [FAQ](https://m7a.top/#/assets/docs/FAQ)
+
 
 </div>
 
-## 功能简介
+## 기능 소개
 
-- **日常**：清体力、每日实训、领取奖励、委托、锄大地
-- **周常**：历战余响、模拟宇宙、忘却之庭
-- **抽卡记录导出**：支持 [SRGF](https://uigf.org/zh/standards/SRGF.html) 标准、**自动对话**
-- 每日实训等任务的完成情况支持**消息推送**
-- 任务刷新或体力恢复到指定值后**自动启动**
-- 任务完成后**声音提示、自动关闭游戏或关机等**
+  - **일일**: 개척력 소모, 일일 훈련, 보상 수령, 의뢰, 필드 파밍
+  - **주간**: 시뮬레이션 우주, 망각의 정원, 고치(歷戰餘響)
+  - **뽑기 기록 내보내기**: [SRGF](https://uigf.org/zh/standards/SRGF.html) 표준 지원, **자동 대화**
+  - 일일 훈련 등 임무 완료 상황 **알림 메시지 전송** 지원
+  - 임무 초기화 또는 개척력이 지정된 값으로 회복되면 **자동 시작**
+  - 임무 완료 후 **소리 알림, 게임 자동 종료 또는 PC 종료 등**
 
-> 其中模拟宇宙调用的 [Auto_Simulated_Universe](https://github.com/CHNZYX/Auto_Simulated_Universe) 项目，锄大地调用的 [Fhoe-Rail](https://github.com/linruowuyin/Fhoe-Rail) 项目
+> 시뮬레이션 우주는 [Auto_Simulated_Universe](https://github.com/CHNZYX/Auto_Simulated_Universe) 프로젝트를, 필드 파밍은 [Fhoe-Rail](https://github.com/linruowuyin/Fhoe-Rail) 프로젝트를 호출하여 사용합니다.
 
-详情见 [配置文件](assets/config/config.example.yaml) 或图形界面设置 ｜🌟喜欢就给个星星吧|･ω･) 🌟｜QQ群 [点击跳转](https://qm.qq.com/q/C3IryUWCQw) TG群 [点击跳转](https://t.me/+ZgH5zpvFS8o0NGI1)
+자세한 내용은 [설정 파일 예시](assets/config/config.example.yaml) 또는 GUI 설정 화면을 참조하세요. ｜🌟마음에 드셨다면 스타(별)를 눌러주세요|･ω･) 🌟｜QQ 그룹 [바로가기](https://qm.qq.com/q/C3IryUWCQw) 텔레그램 그룹 [바로가기](https://t.me/+ZgH5zpvFS8o0NGI1)
 
-## 界面展示
+## 인터페이스 예시
 
-![README](assets/screenshot/README.png)
+## 주의사항
 
-## 注意事项
+  - 반드시 **PC 클라이언트**에서 `1920*1080` 해상도의 창 모드 또는 전체 화면으로 게임을 실행해야 합니다. (HDR은 지원하지 않습니다)
+  - 시뮬레이션 우주 관련: [프로젝트 문서](https://github.com/Night-stars-1/Auto_Simulated_Universe_Docs/blob/docs/docs/guide/index.md) | [Q\&A](https://github.com/Night-stars-1/Auto_Simulated_Universe_Docs/blob/docs/docs/guide/qa.md)
+  - 백그라운드 실행이나 다중 모니터 환경이 필요하다면 [원격 로컬 다중 사용자 데스크톱](https://m7a.top/#/assets/docs/Background)을 시도해 보세요.
+  - 오류가 발생하면 [Issue](https://github.com/moesnow/March7thAssistant/issues)에 제보해 주세요. 토론 및 질문은 [Discussions](https://github.com/moesnow/March7thAssistant/discussions)에서 할 수 있습니다. 그룹 채팅은 가끔 확인하며, [PR](https://github.com/moesnow/March7thAssistant/pulls)은 언제나 환영합니다.
 
-- 必须使用**PC端** `1920*1080` 分辨率窗口或全屏运行游戏（不支持HDR）
-- 模拟宇宙相关 [项目文档](https://github.com/Night-stars-1/Auto_Simulated_Universe_Docs/blob/docs/docs/guide/index.md)  [Q&A](https://github.com/Night-stars-1/Auto_Simulated_Universe_Docs/blob/docs/docs/guide/qa.md)
-- 需要后台运行或多显示器可以尝试 [远程本地多用户桌面](https://m7a.top/#/assets/docs/Background)
-- 遇到错误请在 [Issue](https://github.com/moesnow/March7thAssistant/issues) 反馈，提问讨论可以在 [Discussions](https://github.com/moesnow/March7thAssistant/discussions) ，群聊随缘看，欢迎 [PR](https://github.com/moesnow/March7thAssistant/pulls)
+## 다운로드 및 설치
 
-## 下载安装
+[Releases](https://github.com/moesnow/March7thAssistant/releases/latest) 페이지로 이동하여 최신 버전을 다운로드하고 압축을 푼 뒤, 삼칠이 아이콘의 `March7th Launcher.exe`를 더블 클릭하여 GUI를 실행하세요.
 
-前往 [Releases](https://github.com/moesnow/March7thAssistant/releases/latest) 下载后解压双击三月七图标的 `March7th Launcher.exe` 打开图形界面
+**작업 스케줄러**를 사용하여 예약 실행하거나 즉시 **전체 실행**을 하려면 터미널 아이콘 모양의 `March7th Assistant.exe`를 사용하세요.
 
-如果需要使用 **任务计划程序** 定时运行或直接执行 **完整运行**，可以使用终端图标的 `March7th Assistant.exe`
+업데이트를 확인하려면 GUI 설정 하단의 버튼을 클릭하거나 `March7th Updater.exe`를 더블 클릭하세요.
 
-检测更新可以点击图形界面设置最底下的按钮，或双击 `March7th Updater.exe`
+## 소스 코드로 실행
 
-## 源码运行
-
-如果你是完全不懂的小白，请通过上面的方式下载安装，不用往下看了。
+만약 당신이 아무것도 모르는 초보자라면, 위의 방법으로 다운로드하여 설치하시고, 이 아래 내용은 보지 않으셔도 됩니다.
 
 ```cmd
-# Installation (using venv is recommended)
+# 설치 (가상 환경 사용을 권장합니다)
 git clone --recurse-submodules https://github.com/moesnow/March7thAssistant
 cd March7thAssistant
 pip install -r requirements.txt
 python app.py
 python main.py
 
-# Update
+# 업데이트
 git pull
 git submodule update --init --recursive
 ```
 
 <details>
-<summary>开发相关</summary>
+<summary>개발 관련</summary>
 
-获取 crop 参数表示的裁剪坐标可以通过小助手工具箱内的捕获截图功能
+`crop` 파라미터가 나타내는 잘라내기 좌표는 조수 툴박스 내의 스크린샷 캡처 기능을 통해 얻을 수 있습니다.
 
-python main.py 后面支持参数 fight/universe/forgottenhall 等
+`python main.py` 뒤에 `fight/universe/forgottenhall` 등의 파라미터를 추가하여 실행할 수 있습니다.
 
 </details>
 
----
+-----
 
-如果喜欢本项目，可以微信赞赏送作者一杯咖啡☕
+이 프로젝트가 마음에 드셨다면, 위챗페이로 개발자에게 커피 한 잔을 선물해주세요☕
 
-您的支持就是作者开发和维护项目的动力🚀
+여러분의 지원은 개발자가 프로젝트를 개발하고 유지하는 원동력입니다🚀
 
-![sponsor](assets/app/images/sponsor.jpg)
+-----
 
----
+## 관련 프로젝트
 
-## 相关项目
+March7thAssistant는 다음 오픈소스 프로젝트들의 도움 없이는 만들어질 수 없었습니다:
 
-March7thAssistant 离不开以下开源项目的帮助：
+  - 시뮬레이션 우주 자동화 [https://github.com/CHNZYX/Auto\_Simulated\_Universe](https://github.com/CHNZYX/Auto_Simulated_Universe)
+  - 필드 파밍 자동화 [https://github.com/linruowuyin/Fhoe-Rail](https://github.com/linruowuyin/Fhoe-Rail)
+  - OCR 문자 인식 [https://github.com/hiroi-sora/PaddleOCR-json](https://github.com/hiroi-sora/PaddleOCR-json)
+  - GUI 컴포넌트 라이브러리 [https://github.com/zhiyiYo/PyQt-Fluent-Widgets](https://github.com/zhiyiYo/PyQt-Fluent-Widgets)
 
-- 模拟宇宙自动化 [https://github.com/CHNZYX/Auto_Simulated_Universe](https://github.com/CHNZYX/Auto_Simulated_Universe)
+## 기여자 (Contributors)
 
-- 锄大地自动化 [https://github.com/linruowuyin/Fhoe-Rail](https://github.com/linruowuyin/Fhoe-Rail)
-
-- OCR文字识别 [https://github.com/hiroi-sora/PaddleOCR-json](https://github.com/hiroi-sora/PaddleOCR-json)
-
-- 图形界面组件库 [https://github.com/zhiyiYo/PyQt-Fluent-Widgets](https://github.com/zhiyiYo/PyQt-Fluent-Widgets)
-
-
-## Contributors
 <a href="https://github.com/moesnow/March7thAssistant/graphs/contributors">
 
   <img src="https://contrib.rocks/image?repo=moesnow/March7thAssistant" />
 
 </a>
 
-## Stargazers over time
+
+## 시간에 따른 Stargazer 변화
 
 [![Star History](https://starchart.cc/moesnow/March7thAssistant.svg?variant=adaptive)](https://starchart.cc/moesnow/March7thAssistant)
