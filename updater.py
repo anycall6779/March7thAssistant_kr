@@ -17,7 +17,7 @@ from utils.logger.logger import Logger
 
 
 class Updater:
-    """应用程序更新器，负责检查、下载、解压和安装最新版本的应用程序。"""
+    """애플리케이션 업데이터, 최신 버전의 애플리케이션을 확인, 다운로드, 압축 해제 및 설치하는 역할을 합니다."""
 
     def __init__(self, logger: Logger, download_url=None, file_name=None):
         self.logger = logger
@@ -35,21 +35,21 @@ class Updater:
         self.aria2_path = os.path.abspath("./assets/binary/aria2c.exe")
         self.delete_folder_path = os.path.join("./3rdparty/Fhoe-Rail", "map")
 
-        self.logger.hr("获取下载链接", 0)
+        self.logger.hr("다운로드 링크 가져오기", 0)
         if download_url is None:
             self.download_url = self.get_download_url()
-            self.logger.info(f"下载链接: {green(self.download_url)}")
-            self.logger.hr("完成", 2)
-            input("按回车键开始更新")
+            self.logger.info(f"다운로드 링크: {green(self.download_url)}")
+            self.logger.hr("완료", 2)
+            input("업데이트를 시작하려면 엔터 키를 누르세요")
         else:
-            self.logger.info(f"下载链接: {green(self.download_url)}")
-            self.logger.hr("完成", 2)
+            self.logger.info(f"다운로드 링크: {green(self.download_url)}")
+            self.logger.hr("완료", 2)
         self.download_file_path = os.path.join(self.temp_path, self.file_name)
         self.extract_folder_path = os.path.join(self.temp_path, self.file_name.rsplit(".", 1)[0])
 
     def get_download_url(self):
-        """检测更新并获取下载URL。"""
-        self.logger.info("开始检测更新")
+        """업데이트를 확인하고 다운로드 URL을 가져옵니다."""
+        self.logger.info("업데이트 확인 시작")
         fastest_mirror = self.find_fastest_mirror(self.api_urls)
         try:
             with urlopen(fastest_mirror, timeout=10) as response:
@@ -57,12 +57,12 @@ class Updater:
                     data = json.loads(response.read().decode('utf-8'))
                     return self.process_release_data(data)
         except URLError as e:
-            self.logger.error(f"检测更新失败: {red(e)}")
-            input("按回车键重试...")
+            self.logger.error(f"업데이트 확인 실패: {red(e)}")
+            input("다시 시도하려면 엔터 키를 누르세요...")
             return self.get_download_url()
 
     def process_release_data(self, data):
-        """处理发布数据，获取下载URL并比较版本。"""
+        """릴리스 데이터를 처리하고, 다운로드 URL을 가져와 버전을 비교합니다."""
         version = data["tag_name"]
         download_url = None
         for asset in data["assets"]:
@@ -72,28 +72,28 @@ class Updater:
                 break
 
         if download_url is None:
-            raise Exception("没有找到合适的下载URL")
+            raise Exception("적절한 다운로드 URL을 찾을 수 없습니다")
 
         self.compare_versions(version)
         return download_url
 
     def compare_versions(self, version):
-        """比较本地版本和远程版本。"""
+        """로컬 버전과 원격 버전을 비교합니다."""
         try:
             with open("./assets/config/version.txt", 'r', encoding='utf-8') as file:
                 current_version = file.read().strip()
             if parse(version.lstrip('v')) > parse(current_version.lstrip('v')):
-                self.logger.info(f"发现新版本: {current_version} ——> {version}")
+                self.logger.info(f"새 버전 발견: {current_version} ——> {version}")
             else:
-                self.logger.info(f"本地版本: {current_version}")
-                self.logger.info(f"远程版本: {version}")
-                self.logger.info(f"当前已是最新版本")
+                self.logger.info(f"로컬 버전: {current_version}")
+                self.logger.info(f"원격 버전: {version}")
+                self.logger.info(f"이미 최신 버전입니다")
         except Exception as e:
-            self.logger.info(f"本地版本获取失败: {e}")
-            self.logger.info(f"最新版本: {version}")
+            self.logger.info(f"로컬 버전 가져오기 실패: {e}")
+            self.logger.info(f"최신 버전: {version}")
 
     def find_fastest_mirror(self, mirror_urls, timeout=5):
-        """测速并找到最快的镜像。"""
+        """속도를 측정하여 가장 빠른 미러를 찾습니다."""
         def check_mirror(mirror_url):
             try:
                 start_time = time.time()
@@ -112,12 +112,12 @@ class Updater:
         return fastest_mirror if fastest_mirror else mirror_urls[0]
 
     def download_with_progress(self):
-        """下载文件并显示进度条。"""
-        self.logger.hr("下载", 0)
+        """파일을 다운로드하고 진행률 표시줄을 보여줍니다."""
+        self.logger.hr("다운로드", 0)
         proxies = urllib.request.getproxies()
         while True:
             try:
-                self.logger.info("开始下载...")
+                self.logger.info("다운로드 시작...")
                 if os.path.exists(self.aria2_path):
                     command = [
                         self.aria2_path,
@@ -129,10 +129,10 @@ class Updater:
 
                     if "github.com" in self.download_url:
                         command.insert(2, "--max-connection-per-server=16")
-                        # 仅在下载 GitHub 资源时启用断点续传，避免416错误
+                        # GitHub 리소스 다운로드 시에만 이어받기를 활성화하여 416 오류 방지
                         if os.path.exists(self.download_file_path):
                             command.insert(2, "--continue=true")
-                    # 代理设置
+                    # 프록시 설정
                     for scheme, proxy in proxies.items():
                         if scheme in ("http", "https", "ftp"):
                             command.append(f"--{scheme}-proxy={proxy}")
@@ -151,55 +151,55 @@ class Updater:
                                         f.write(chunk)
                                         pbar.update(len(chunk))
 
-                self.logger.info(f"下载完成: {green(self.download_file_path)}")
+                self.logger.info(f"다운로드 완료: {green(self.download_file_path)}")
                 break
 
             except Exception as e:
-                self.logger.error(f"下载失败: {red('请检查网络连接是否正常，或切换更新源后重试。')}")
-                input("按回车键重试. . .")
-        self.logger.hr("完成", 2)
+                self.logger.error(f"다운로드 실패: {red('네트워크 연결이 정상인지 확인하거나, 업데이트 소스를 변경한 후 다시 시도하세요.')}")
+                input("다시 시도하려면 엔터 키를 누르세요. . .")
+        self.logger.hr("완료", 2)
 
     def extract_file(self):
-        """解压下载的文件。"""
-        self.logger.hr("解压", 0)
+        """다운로드한 파일의 압축을 해제합니다."""
+        self.logger.hr("압축 해제", 0)
         while True:
             try:
-                self.logger.info("开始解压...")
+                self.logger.info("압축 해제 시작...")
                 if os.path.exists(self.exe_path):
                     subprocess.run([self.exe_path, "x", self.download_file_path, f"-o{self.temp_path}", "-aoa"], check=True)
                 else:
                     shutil.unpack_archive(self.download_file_path, self.temp_path)
-                self.logger.info(f"解压完成: {green(self.extract_folder_path)}")
-                self.logger.hr("完成", 2)
+                self.logger.info(f"압축 해제 완료: {green(self.extract_folder_path)}")
+                self.logger.hr("완료", 2)
                 return True
             except Exception as e:
-                self.logger.error(f"解压失败: {red(e)}")
-                self.logger.hr("完成", 2)
-                input("按回车键重新下载. . .")
+                self.logger.error(f"압축 해제 실패: {red(e)}")
+                self.logger.hr("완료", 2)
+                input("다시 다운로드하려면 엔터 키를 누르세요. . .")
                 if os.path.exists(self.download_file_path):
                     os.remove(self.download_file_path)
                 return False
 
     def cover_folder(self):
-        """覆盖安装最新版本的文件。"""
-        self.logger.hr("覆盖", 0)
+        """최신 버전의 파일로 덮어씁니다."""
+        self.logger.hr("덮어쓰기", 0)
         while True:
             try:
-                self.logger.info("开始覆盖...")
+                self.logger.info("덮어쓰기 시작...")
                 if "full" in self.file_name and os.path.exists(self.delete_folder_path):
                     shutil.rmtree(self.delete_folder_path)
                 shutil.copytree(self.extract_folder_path, self.cover_folder_path, dirs_exist_ok=True)
-                self.logger.info(f"覆盖完成: {green(self.cover_folder_path)}")
+                self.logger.info(f"덮어쓰기 완료: {green(self.cover_folder_path)}")
                 break
             except Exception as e:
-                self.logger.error(f"覆盖失败: {red(e)}")
-                input("按回车键重试. . .")
-        self.logger.hr("完成", 2)
+                self.logger.error(f"덮어쓰기 실패: {red(e)}")
+                input("다시 시도하려면 엔터 키를 누르세요. . .")
+        self.logger.hr("완료", 2)
 
     def terminate_processes(self):
-        """终止相关进程以准备更新。"""
-        self.logger.hr("终止进程", 0)
-        self.logger.info("开始终止进程...")
+        """업데이트 준비를 위해 관련 프로세스를 종료합니다."""
+        self.logger.hr("프로세스 종료", 0)
+        self.logger.info("프로세스 종료 시작...")
         for proc in psutil.process_iter(attrs=['pid', 'name']):
             if proc.info['name'] in self.process_names:
                 try:
@@ -207,24 +207,24 @@ class Updater:
                     proc.wait(10)
                 except (psutil.NoSuchProcess, psutil.TimeoutExpired, psutil.AccessDenied):
                     pass
-        self.logger.info(green("终止进程完成"))
-        self.logger.hr("完成", 2)
+        self.logger.info(green("프로세스 종료 완료"))
+        self.logger.hr("완료", 2)
 
     def cleanup(self):
-        """清理下载和解压的临时文件。"""
-        self.logger.hr("清理", 0)
-        self.logger.info("开始清理...")
+        """다운로드 및 압축 해제된 임시 파일을 정리합니다."""
+        self.logger.hr("정리", 0)
+        self.logger.info("정리 시작...")
         try:
             os.remove(self.download_file_path)
-            self.logger.info(f"清理完成: {green(self.download_file_path)}")
+            self.logger.info(f"정리 완료: {green(self.download_file_path)}")
             shutil.rmtree(self.extract_folder_path)
-            self.logger.info(f"清理完成: {green(self.extract_folder_path)}")
+            self.logger.info(f"정리 완료: {green(self.extract_folder_path)}")
         except Exception as e:
-            self.logger.error(f"清理失败: {e}")
-        self.logger.hr("完成", 2)
+            self.logger.error(f"정리 실패: {e}")
+        self.logger.hr("완료", 2)
 
     def run(self):
-        """运行更新流程。"""
+        """업데이트 절차를 실행합니다."""
         while True:
             self.download_with_progress()
             if self.extract_file():
@@ -232,15 +232,15 @@ class Updater:
         self.terminate_processes()
         self.cover_folder()
         self.cleanup()
-        input("按回车键退出并打开软件")
+        input("엔터 키를 눌러 종료하고 프로그램을 여세요")
         if os.system(f'cmd /c start "" "{os.path.abspath("./March7th Launcher.exe")}"'):
             subprocess.Popen(os.path.abspath("./March7th Launcher.exe"))
 
 
 def check_temp_dir_and_run():
-    """检查临时目录并运行更新程序。"""
+    """임시 디렉토리를 확인하고 업데이터를 실행합니다."""
     if not getattr(sys, 'frozen', False):
-        print("更新程序只支持打包成exe后运行")
+        print("업데이터는 exe로 패키징된 후에만 실행할 수 있습니다")
         sys.exit(1)
 
     temp_path = os.path.abspath("./temp")
